@@ -1,4 +1,7 @@
-app.value('profiles', []);
+/**
+ * Template for user and chat array
+ */
+app.value('users', []);
 app.value('chats',
     [
         {
@@ -214,12 +217,22 @@ app.value('chats',
     ]
 );
 
+/**
+ * The REST API service, currently serving as a temporary object handler.
+ * Usage:
+ * api.get(type, id) - where type is either 'user', 'messages', and 'sidebar', and id is either the user id or the group chat id
+ * api.post(type, id, payload) - where type currently can only be 'message', 'id' is the the group chats id to post to ->
+ * -> and payload is the object to post. (i.e {from: 123, message: "hey"})
+ * api.users(action, payload) - where action is either 'add', 'remove' or 'status' ->
+ * -> and payload is either the object to remove, object to add, or the object to change status on
+ * @type {Object}
+ */
 app.factory('api', function(profiles, chats) {
     return {
         get: function(type, id) {
             switch (type) {
-                case 'profile':
-                    return profiles[id];
+                case 'user':
+                    return users[id];
                 break;
 
                 case 'messages':
@@ -232,23 +245,16 @@ app.factory('api', function(profiles, chats) {
 
                 case 'sidebar':
                     var temp = [];
-                    var profileChats = this.get("profile", id).group_chats;
+                    var userChats = this.get("user", id).group_chats;
                     for (var i = 0; i < chats.length; i++) {
-                        for (var j = 0; j < profileChats.length; j++) {
-                            if (chats[i].group_id === profileChats[j]) {
+                        for (var j = 0; j < userChats.length; j++) {
+                            if (chats[i].group_id === userChats[j]) {
                                 temp.push(chats[i]);
                             }
                         }
                     }
                     return temp;
                 break;
-            }
-        },
-        changeStatus: function(id, status) {
-            for (var i = 0; i < chats.length; i++) {
-                if (profiles[i].id === id) {
-                    profiles[i].status = status;
-                }
             }
         },
         post: function(type, id, payload) {
@@ -261,6 +267,25 @@ app.factory('api', function(profiles, chats) {
                                 message: payload.message
                             });
                             chats[i].last_message_timestamp = new Date();
+                        }
+                    }
+                break;
+            }
+        },
+        users: function(action, payload) {
+            switch (action) {
+                case 'add':
+                    users.push(payload);
+                break;
+
+                case 'remove':
+                    users.splice(payload, 1);
+                break;
+
+                case 'status':
+                    for (var i = 0; i < users.length; i++) {
+                        if (users[i].id === payload.id) {
+                            users[i].status = payload.status;
                         }
                     }
                 break;
