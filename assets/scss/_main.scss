@@ -19,7 +19,9 @@ section.chatSection {
         .pmContainer {
             margin: 10px 60px 10px 5px;
             p {
-              word-break: break-all;
+              word-break: break-word;
+              max-width: 100%;
+              display: inline-block;
             }
         }
     }
