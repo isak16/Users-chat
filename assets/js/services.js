@@ -250,6 +250,21 @@ app.factory('api', function(profiles, chats) {
                     profiles[i].status = status;
                 }
             }
+        },
+        post: function(type, id, payload) {
+            switch (type) {
+                case 'message':
+                    for (var i = 0; i < chats.length; i++) {
+                        if (chats[i].group_id === id) {
+                            chats[i].messages.push({
+                                from: payload.from,
+                                message: payload.message
+                            });
+                            chats[i].last_message_timestamp = new Date();
+                        }
+                    }
+                break;
+            }
         }
     };
 });
