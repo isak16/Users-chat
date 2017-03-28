@@ -3,29 +3,43 @@
  * @type {String} Type of requests
  * Usage: api.get("sidebar");
  */
-app.factory('api', function($http) {
-    var url = "";
+app.factory('api', function() {
+    var profiles = [];
+    var chats = [];
+
     return {
         get: function(type, id = null) {
-            url += "/" + type;
-
             switch (type) {
                 case 'profile':
                     var profileId = (id != null) ? id : localStorage.userId;
-                    return $http.get(url + "/" + profileId);
+                    return profiles[profileId];
                 break;
 
                 case 'messages':
-                    return $http.get(url + "/" + id);
+                for (i = 0; i < chats.length; i++) {
+                    if (chats[i].id === id) {
+                        return chats[i];
+                    }
+                }
                 break;
 
                 case 'sidebar':
-                    return $http.get(url + "/" + localStorage.userId);
+                    var temp = [];
+                    for (var i = 0; i < chats.length; i++) {
+                        if (chats[i].id === id) {
+                            temp.push(chats[i]);
+                        }
+                    }
+                    return temp;
                 break;
             }
         },
-        post: function() {
-
+        changeStatus: function(id, status) {
+            for (var i = 0; i < chats.length; i++) {
+                if (profiles[i].id === id) {
+                    profiles[i].status = status;
+                }
+            }
         }
     }
 });
