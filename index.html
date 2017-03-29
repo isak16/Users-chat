@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,8 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body class="app-login">
-   <div class="container-fluid">
+
+   <div class="container-fluid" ng-controller="register">
        <div class="row">
             <div class="col-xs-12 login-header text-center">
                 <img src="assets/img/logga_gif.gif">
@@ -20,47 +21,50 @@
             <div class="col-sm-8 col-sm-offset-2 login-window">
                 <h1>Login now</h1>
                 <h2>Unicorns be waiting</h2>
-                <form class="form-inline" id="login-form">
                     <div class="form-group">
                         <label class="sr-only" for="username">Username</label>
-                        <input type="email" class="form-control" id="username" name="username" placeholder="Username">
+                        <input type="email" class="form-control" id="username" name="username" placeholder="Username" ng-model="user.email">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="user.password">
                     </div>
-                    <input type="submit" class="login-button" value="Sign in" onclick="window.location='./main.html';">
+                    <button type="submit" class="login-button">Sign in</button>
                 </form>
+                {{hello}}
                 <p>Don't have an account?</p>
                 <a href="#" onclick="openRegisterTab()">Create account <span class="caret"></span></a>
                 <div id="app-register">
                     <h3>So you wanna be a rocket scientist huh?</h3>
                     <p>Let's see what we can do. We'll need some information first though.</p>
                     <div class="col-sm-8 col-sm-offset-2 col-lg-4 col-lg-offset-4 text-left">
-                        <form id="register-form">
+                        <form id="register-form" ng-submit="register(user)" novalidate>
                             <div class="form-group">
                                 <label for="regusername">Username</label>
-                                <input type="text" class="form-control" id="regusername" placeholder="Username">
                             </div>
                             <div class="form-group">
                                 <label for="regemail">Email</label>
-                                <input type="email" class="form-control" id="regemail" placeholder="Email">
                             </div>
                             <div class="form-group">
                                 <label for="regpassword">Password</label>
-                                <input type="password" class="form-control" id="regpassword" placeholder="Password">
                             </div>
                             <div class="form-group">
                                 <label for="regrepeatpassword">Repeat password</label>
                                 <input type="password" class="form-control" id="regrepeatpassword" placeholder="Repeat password">
                             </div>
-                            <input type="submit" class="register-button" value="Register">
+                            <button type="submit" class="register-button">Register</button>
                         </form>
                     </div>
                 </div>
             </div>
        </div>
    </div>
+   <script src="bower_components/jquery/dist/jquery.js"></script>
+   <script src="bower_components/angular/angular.js"></script>
+   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+   <script src="assets/js/controller/register.js"></script>
    <script>
    function openRegisterTab() {
        var appregister = document.getElementById("app-register");

@@ -1,5 +1,6 @@
 app.run(function($rootScope) {
 $rootScope.lightTheme = false;
+$rootScope.users = [];
 });
 
 app.controller('settingsProfile' , function ($scope, $document) {
@@ -24,7 +25,7 @@ app.directive( 'bodyClass', function() {
                 console.log(newValue);
                 if (newValue == true) {
                     angular.element('body').addClass('light');
-                    
+
 
                 } else {
                     angular.element('body').removeClass('light');
