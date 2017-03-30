@@ -41,13 +41,13 @@
                     <p>Let's see what we can do. We'll need some information first though.</p>
                     <div class="col-sm-8 col-sm-offset-2 col-lg-4 col-lg-offset-4 text-left">
 
-                        <form id="register-form" ng-submit="register(userReg)" novalidate>
+                        <form id="register-form" ng-submit="register(userReg)" novalidate name="registerForm">
 
                             <div class="form-group">
                                 <label for="regusername">Username</label>
                                 <input type="text" class="form-control" id="regusername" placeholder="Username" ng-model="userReg.userName" ng-pattern="userRegex" name="username">
                                 {{userRegex}}
-                                {{registerForm.$error}}
+                                {{registerForm.username.$error}}
                             </div>
                             <div class="form-group">
                                 <label for="regemail">Email</label>
