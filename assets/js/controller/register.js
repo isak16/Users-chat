@@ -9,4 +9,5 @@ app.controller('register', function($scope){
         console.log('hej');
         console.log(user);
     };
+    $scope.userRegex = '/^[a-z0-9]{1,}$/';
 });
