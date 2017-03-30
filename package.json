@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/isak16/Users-chat#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-ng-annotate": "^2.0.0",

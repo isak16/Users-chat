@@ -24,62 +24,16 @@
                 <a ui-sref="settingsProfile" class="fa fa-cogs" aria-hidden="true"></a>
             </div>
         </div>
-        <div id="sidebar-feed">
+        <div ng-controller="newsSidebar" id="sidebar-feed">
             <section class="sidebar-feed">
-                <article class="sidebar-single-feed">
-                    <a ui-sref="chat">
-                        <img src="assets/img/hash-tag-white-2.png" alt="">
-                        <p>Programming</p>
-                    </a>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>Isak kuk Larsson</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>RealXdMemes</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>Sebbeboi</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>Robin Edbom</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>HaHaa</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>HaHaa</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>HaHaa</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>HaHaa</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>HaHaa</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>HaHaa</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>HaHaa</p>
-                </article>
-                <article class="sidebar-single-feed">
-                    <img src="assets/img/jobs.png" alt="">
-                    <p>HaHaa</p>
-                </article>
+                <div ng-repeat="n in sideFeed">
+                    <article class="sidebar-single-feed">
+                        <a ui-sref="chat">
+                            <img src="{{n.image}}" alt="">
+                            <p>{{n.name}}</p>
+                        </a>
+                    </article>
+                </div>
             </section>
         </div>
         <div class="sidebar-bottom-icons">
@@ -104,5 +58,6 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="dist/all.js"></script>
+<script src="assets/js/sidebar.js"></script>
 </body>
 </html>
