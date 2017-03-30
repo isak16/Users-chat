@@ -227,7 +227,7 @@ app.value('chats',
  * -> and payload is either the object to remove, object to add, or the object to change status on
  * @type {Object}
  */
-app.factory('api', function(profiles, chats) {
+app.factory('api', function(users, chats) {
     return {
         get: function(type, id) {
             switch (type) {
