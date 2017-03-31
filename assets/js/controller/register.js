@@ -7,6 +7,7 @@ app.controller('register', function($scope, api){
     $scope.validator = {};
     $scope.register = function(userReg){
         api.users('add', userReg);
+    $scope.regexpuser = /^[a-zA-Z0-9\_\-]{1,12}$/;
 
     };
 
@@ -19,3 +20,4 @@ app.controller('register', function($scope, api){
     };
 
 });
+

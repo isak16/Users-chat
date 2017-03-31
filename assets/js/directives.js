@@ -1,4 +1,4 @@
-app.directive("regexp" , function() {
+app.directive("registerValidator" , function() {
     return {
         restrict: 'A',
         link: function(scope, controller) {
