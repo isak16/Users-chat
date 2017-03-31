@@ -1,15 +1,18 @@
 app.directive("regexp" , function() {
     return {
-        require: "ngModel",
-        link: function(scope , ngModel) {
-            scope.$watch( ngModel, function(newValue) {
-                if ( newValue == null ) {
-                    return true;
+        restrict: 'A',
+        link: function(scope, controller) {
+            scope.$watch('userReg.userName', function(newValue) {
+                if (newValue == null) {
+                    scope.validator.username = true;
+                } else {
+                    if (/^[a-zA-Z0-9]{1,}$/.test(newValue)) {
+                        scope.validator.username = true;
+                    } else {
+                        scope.validator.username = false;
+                    }
                 }
-                else {
-                   console.log(/^[a-zA-Z0-9]{1,}$/.test(newValue));
-                }
-            } );
+            });
         }
     }
 });
