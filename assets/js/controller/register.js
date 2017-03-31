@@ -3,7 +3,7 @@ app.run(function($rootScope) {
     $rootScope.users = [];
 });
 
-app.controller('register', function($scope, api, users){
+app.controller('register', function($scope, api){
     var user = {};
     $scope.register = function(userReg){
         api.users('add', userReg);
