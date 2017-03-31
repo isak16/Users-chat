@@ -6,7 +6,7 @@ app.directive("regexp" , function() {
                 if (newValue == null) {
                     scope.validator.username = true;
                 } else {
-                    if (/^[a-zA-Z0-9]{1,}$/.test(newValue)) {
+                    if (/^[a-zA-Z0-9\_\-]{1,12}$/.test(newValue)) {
                         scope.validator.username = true;
                     } else {
                         scope.validator.username = false;
