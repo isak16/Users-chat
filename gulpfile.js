@@ -12,7 +12,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('concat', function(){
-    return gulp.src('./assets/js/*.js')
+    return gulp.src('./assets/js/**/*.js')
         .pipe(concat('./all.js'))
         .pipe(gulp.dest('./dist'))
         .pipe(ngAnnotate())
