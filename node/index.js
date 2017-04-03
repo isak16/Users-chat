@@ -83,14 +83,13 @@ app.post("/users", function(request, response) {
  * @return Object|false
  */
 app.put("/users/:id", function(request, response) {
-    users.updateOne({
+    users.updateOne(
         { _id: request.params.id },
         {
             "display_name": request.body.display_name,
             "email": request.body.email,
             "password": request.body.password
-        }
-    }, function(error, result) {
+        }, function(error, result) {
         if (error) {
             response.status(500).send(error);
             return false;
