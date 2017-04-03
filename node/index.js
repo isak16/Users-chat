@@ -1,8 +1,8 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-
 var app = express();
+
 mongoose.connect("mongodb://localhost:27017/chat");
 var db = mongoose.connection;
 var users = db.collection("users");
@@ -198,6 +198,13 @@ app.put("/conversations/members/:convid/:action", function(request, response) {
  * @return true|false
  */
 app.put("/conversations/message/:convid", function(request, response) {
+    var d = new Date();
+    var day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+    var month = d.getMonth() < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
+    var hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
+    var minutes = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+    var seconds = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+    var dateInput = d.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
     conversations.updateOne({
         _id: request.params.convid,
         members: { $in: request.body.userid }
@@ -206,7 +213,7 @@ app.put("/conversations/message/:convid", function(request, response) {
         messages: { $push: {
             from: request.body.userid,
             content: request.body.content,
-            date: new Date()
+            date: dateInput
         }}
     }, function(error, result) {
         if (error) {
