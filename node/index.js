@@ -141,3 +141,79 @@ app.get("/conversations/:userid/:convid", function(request, response) {
         response.send(result);
     });
 });
+
+/**
+ * POST a new conversation object
+ * @type function
+ * @return true|false
+ */
+app.post("/conversations", function(request, response) {
+    if (request.body.members.length < 2) {
+        response.status(500).send(error);
+        return false;
+    }
+
+    if (!request.body.hasOwnProperty("last_timestamp")) {
+        request.body.last_timestamp = new Date();
+    }
+
+    conversations.insertOne(request.body, function(error, result) {
+        if (error) {
+            response.status(500).send(error);
+            return false;
+        } else if (result) {
+            response.send("OK");
+        }
+    })
+});
+
+/**
+ * Perform an action on a conversation group array, i.e add or remove
+ * @type function
+ */
+app.put("/conversations/members/:convid/:action", function(request, response) {
+    var _query = {};
+    switch (request.params.action) {
+        case 'remove':
+            _query = {$pull: {members: request.body.userid}};
+        break;
+        case 'add':
+            _query = {$push: {members: request.body.userid}};
+        break;
+    }
+
+    conversations.updateOne({ _id: request.params.convid }, _query, function(error, result) {
+        if (error) {
+            response.status(500).send(error);
+            return false;
+        } else if (result) {
+            response.send(result);
+        }
+    });
+});
+
+/**
+ * PUT a message into a conversation
+ * @type function
+ * @return true|false
+ */
+app.put("/conversations/message/:convid", function(request, response) {
+    conversations.updateOne({
+        _id: request.params.convid,
+        members: { $in: request.body.userid }
+    },
+    {
+        messages: { $push: {
+            from: request.body.userid,
+            content: request.body.content,
+            date: new Date()
+        }}
+    }, function(error, result) {
+        if (error) {
+            response.status(500).send(error);
+            return false;
+        } else if (result) {
+            response.status(result);
+        }
+    });
+});
