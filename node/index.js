@@ -17,6 +17,10 @@ app.use(bodyParser.json());
  * 3. Miscellaneous (login, etc)
  **************************************************/
 
+////////////////////////////////////////
+//////////// 1. Users //////////////////
+////////////////////////////////////////
+
 /**
  * GET object with quantity and users array properties
  * @type function
@@ -30,7 +34,7 @@ app.get("/users", function(request, response) {
         }
         response.send({
             quantity: result.length,
-            users: result
+            entries: result
         });
     })
 });
@@ -92,5 +96,48 @@ app.put("/users/:id", function(request, response) {
             return false;
         }
         response.send(request.body);
+    });
+});
+
+////////////////////////////////////////
+///////// 2. Conversations /////////////
+////////////////////////////////////////
+
+/**
+ * GET all conversations tied to a specific user
+ * @type function
+ * @return Object|false
+ */
+app.get("/conversations/:userid", function(request, response) {
+    // needs to return false if header isn't validated
+    conversations.find({
+        members: { $in: request.params.userid }
+    }, function(error, result) {
+        if (error) {
+            response.status(500).send(error);
+            return false;
+        }
+        response.send({
+            quantity: result.length,
+            entries: result
+        });
+    });
+});
+
+/**
+ * GET a specific conversation
+ * @type function
+ * @return Object|false
+ */
+app.get("/conversations/:userid/:convid", function(request, response) {
+    conversations.find({
+        members: { $in: request.params.userid },
+        _id: request.params.convid
+    }, function(error, result) {
+        if (error) {
+            response.status(500).send(error);
+            return false;
+        }
+        response.send(result);
     });
 });
