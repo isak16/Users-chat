@@ -1,0 +1,174 @@
+{
+    "users": [
+        {
+        	"id": 1,
+        	"email": "Baquai@test.se",
+        	"display_name": "Jakob Johansson",
+        	"password": "1234",
+        	"chats": [101,102,107,108]
+        },
+        {
+        	"id": 2,
+        	"email": "isak@test.se",
+        	"display_name": "NastyBlonde",
+        	"password": "1234",
+        	"chats": [101,108,109]
+        },
+        {
+        	"id": 3,
+        	"email": "sebbe@test.se",
+        	"display_name": "SebbeKuk",
+        	"password": "1234",
+        	"chats": [103,105,108,109,110]
+        },
+        {
+        	"id": 4,
+        	"email": "rebecka@test.se",
+        	"display_name": "BeCCizz",
+        	"password": "1234",
+        	"chats": [102,105,108,109]
+        },
+        {
+        	"id": 5,
+        	"email": "ErikTL@test.se",
+        	"display_name": "Erik Lennsröm",
+        	"password": "1234",
+        	"chats": [103,108,111,114]
+        },
+        {
+        	"id": 6,
+        	"email": "oskar@test.se",
+        	"display_name": "OgiZiZHZz",
+        	"password": "1234",
+        	"chats": [104,108,110]
+        },
+        {
+        	"id": 7,
+        	"email": "Olle@test.se",
+        	"display_name": "Olle Jonsson",
+        	"password": "1234",
+        	"chats": [106,108,112]
+        },
+        {
+        	"id": 8,
+        	"email": "Sven@test.se",
+        	"display_name": "Sven Jonsson",
+        	"password": "1234",
+        	"chats": [106,108,111,112]
+        },
+        {
+        	"id": 9,
+        	"email": "Lisa@test.se",
+        	"display_name": "Lisa",
+        	"password": "1234",
+        	"chats": [108,111,113]
+        },
+        {
+        	"id": 10,
+        	"email": "Izzie@test.se",
+        	"display_name": "Queen Izzie",
+        	"password": "1234",
+        	"chats": [108,113,114]
+        }
+    ],
+    "conversations": [
+        {
+        	"id": 101,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [1, 2]
+        },
+        {
+        	"id": 102,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [1,4]
+        },
+        {
+        	"id": 103,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [5,3]
+        },
+        {
+        	"id": 104,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [6,5]
+        },
+        {
+        	"id": 105,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [4,3]
+        },
+        {
+        	"id": 106,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [7,8]
+        },
+        {
+        	"id": 107,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [1,10]
+        },
+        {
+        	"id": 108,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [1,2,3,4,5,6,7,8,9,10]
+        },
+        {
+        	"id": 109,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [4,3,2]
+        },
+        {
+        	"id": 110,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [6,3]
+        },
+        {
+        	"id": 111,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [9,8,5]
+        },
+        {
+        	"id": 112,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [7,8]
+        },
+        {
+        	"id": 113,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [9,10]
+        },
+        {
+        	"id": 114,
+        	"name": "null",
+        	"last_timestamp": "",
+        	"messages": [],
+        	"members": [10,5]
+        }
+    ]
+}
