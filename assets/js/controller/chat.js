@@ -1,4 +1,4 @@
-app.controller('chatSection' , function($scope) {
+app.controller('chatSection' , function($scope, $state, $stateParams) {
     $scope.testChat = [
         {author:'you', image: 'assets/img/jobs.png',status: 'online', message:'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
         {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
@@ -33,7 +33,10 @@ app.controller('chatSection' , function($scope) {
         };
         $scope.testChat.push(content);
         $scope.content.message = '';
-    }
+    };
+    //Chatid passed from ui-sref
+   // console.log($stateParams.chatId);
+   // console.log($state.current);
 });
 
 app.controller('newsSection' , function($scope) {
@@ -47,4 +50,6 @@ app.controller('newsSection' , function($scope) {
         {author: 'Bill Gates',status: 'online', excerpt: 'Im going to destroy shit', time: '16:24',image: 'assets/img/other.jpg'},
         {author: 'Bill Gates',status: 'online', excerpt: 'Im going to destroy rofl', time: '16:23',image: 'assets/img/other.jpg'}
     ];
+
+
 });

@@ -26,12 +26,11 @@
         </div>
         <div ng-controller="newsSidebar" id="sidebar-feed">
             <section class="sidebar-feed">
-                <div ng-repeat="n in sideFeed">
+                <div ng-repeat="messageItem in sideFeed">
                     <article class="sidebar-single-feed">
-                        <a ui-sref="chat">
-                            <img src="{{n.image}}" alt="">
-                            <p>{{n.name}}</p>
-                        </a>
+                        <a ui-sref="chat({chatId: messageItem.id})"> asd</a>
+                        <img src="{{ messageItem.picture }}" alt="">
+                        <p>{{messageItem.name}}</p>
                     </article>
                 </div>
             </section>
