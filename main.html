@@ -28,9 +28,10 @@
             <section class="sidebar-feed">
                 <div ng-repeat="messageItem in sideFeed">
                     <article class="sidebar-single-feed">
-                        <a ui-sref="chat({chatId: messageItem.id})"> asd</a>
+                        <a ui-sref="chat({chatId: messageItem.id})">
                         <img src="{{ messageItem.picture }}" alt="">
                         <p>{{messageItem.name}}</p>
+                        </a>
                     </article>
                 </div>
             </section>
