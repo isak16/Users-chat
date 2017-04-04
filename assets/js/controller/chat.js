@@ -1,4 +1,6 @@
-app.controller('chatSection' , function($scope, $state, $stateParams) {
+app.controller('chatSection' , function($scope, api, $state, $stateParams) {
+    /*api.groups.get($stateParams.chatId, function (res, res1) {
+    });*/
     $scope.testChat = [
         {author:'you', image: 'assets/img/jobs.png',status: 'online', message:'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
         {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
@@ -34,9 +36,7 @@ app.controller('chatSection' , function($scope, $state, $stateParams) {
         $scope.testChat.push(content);
         $scope.content.message = '';
     };
-    //Chatid passed from ui-sref
-   // console.log($stateParams.chatId);
-   // console.log($state.current);
+
 });
 
 app.controller('newsSection' , function($scope) {
