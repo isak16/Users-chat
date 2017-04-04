@@ -87,7 +87,7 @@ app.post("/users", function(request, response) {
         if (error) {
             response.status(500).send(error);
             return false;
-        } else if (result.length > 0) {
+        } else if (result.length <= 1) {
             users.insertOne(request.body, function(error, result) {
                 if (error) {
                     response.status(500).send(error);
