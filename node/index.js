@@ -15,6 +15,11 @@ app.use(bodyParser.json());
  * 1. Users
  * 2. Conversations
  * 3. Miscellaneous (login, etc)
+ *
+ * To do:
+ * Login router
+ * Send header / cookie
+ * Validate before responding
  **************************************************/
 
 ////////////////////////////////////////
