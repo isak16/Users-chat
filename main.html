@@ -26,19 +26,24 @@
         </div>
         <div ng-controller="newsSidebar" id="sidebar-feed">
             <section class="sidebar-feed">
-                <div ng-repeat="n in sideFeed">
+                <div ng-repeat="messageItem in sideFeed">
                     <article class="sidebar-single-feed">
-                        <a ui-sref="chat">
-                            <img src="{{n.image}}" alt="">
-                            <p>{{n.name}}</p>
+                        <a ui-sref="chat({chatId: messageItem.id})">
+                        <img src="{{ messageItem.picture }}" alt="">
+                        <p>{{messageItem.name}}</p>
                         </a>
                     </article>
                 </div>
             </section>
         </div>
+        <div id="sidebar-search">
+            <form>
+                <input type="search" placeholder="Search for usernames and conversations..." />
+            </form>
+        </div>
         <div class="sidebar-bottom-icons">
             <a ui-sref="feed"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a>
+            <a href="#" id="search-button"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a>
             <a href="#"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
             <a href="#"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
         </div>

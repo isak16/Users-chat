@@ -3,30 +3,35 @@ app.factory('api', function($http) {
     return {
         users: {
             get: function(id) {
-                return $http.get(  url + "users/" + id);
+                return $http.get(url + "users/" + id);
             },
             add: function(user) {
-                return $http.post(  url + "users/", user);
+                return $http.post(url + "users", user);
             },
             remove: function(user) {
-                return $http.delete(  url + "users/", user);
+                return $http.delete(url + "users", user);
             },
             update: function(user) {
-                return $http.put(  url + "users/", user);
+                return $http.put(url + "users", user);
             },
-            login: function(username, password) {
-                return $http.post(  url + "users/login/", { "username": username, "password": password});
+            login: function(email, password) {
+                return $http.post(url + "login", { "email": email, "password": password});
             }
         },
-        groups: {
-            get: function(id) {
-                return $http.get(  url + "groups/" + id);
+        conversations: {
+            get: function(userid, id) {
+                return $http.get(url + "conversations/" + userid + "/" + id);
             },
-            add: function(group) {
-                return $http.post(  url + "groups/", group);
+            add: function(conversation) {
+                return $http.post(url + "conversations", conversation);
             },
             remove: function(id) {
-                return $http.delete(  url + "groups/", group);
+                return $http.delete(url + "conversations", conversation);
+            }
+        },
+        sidebar: {
+            get: function(id) {
+                return $http.get(url + "conversations/" + id);
             }
         }
     };
