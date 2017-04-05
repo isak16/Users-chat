@@ -45,22 +45,34 @@
 
                             <div class="form-group">
                                 <label for="regusername">Username</label>
-                                <input type="text" class="form-control" id="regusername" placeholder="Username" ng-model="userReg.userName" name="username" regexp>
-                                {{registerForm.username.$value}}
-                                {{registerForm.username.$error.pattern}}
+                                <input type="text" class="form-control" id="regusername" placeholder="Username" ng-model="userReg.userName" name="username" ng-pattern="/^[a-zA-Z0-9]{1,}$/">
+
+                                <div ng-if="registerForm.username.$error.pattern == true" class="alert alert-danger regValid">
+                                        <p>
+                                            Only numbers and letters allowed.
+                                        </p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="regemail">Email</label>
-                                <input type="email" class="form-control" id="regemail" placeholder="Email" ng-model="userReg.email">
+                                <input type="email" class="form-control" id="regemail" placeholder="Email" ng-model="userReg.email" name="email">
+                                <div ng-if="registerForm.email.$error.email == true" class="alert alert-danger regValid">
+                                    Not a proper e-mail.
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="regpassword">Password</label>
-                                <input type="password" class="form-control" id="regpassword" placeholder="Password" ng-model="userReg.password">
+                                <input type="password" class="form-control" id="regpassword" placeholder="Password" ng-model="userReg.password" name="password" ng-pattern="/^\S{1,}$/" ng-trim="false"  ng-minlength="8">
+                                <div ng-if="registerForm.password.$error.pattern == true || registerForm.password.$error.minlength == true" class="alert alert-danger">
+                                    <p>
+                                        Atleast 8 digits. No spaces allowed.
+                                    </p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="regrepeatpassword">Repeat password</label>
-                                <input type="password" class="form-control" id="regrepeatpassword" compare-to="userReg.password" ng-model="userReg.confirmPassword" required placeholder="Repeat password">
-                                {{userReg.confirmPassword}}
+                                <input type="password" class="form-control" id="regrepeatpassword" compare-to="userReg.password" ng-model="userReg.confirmPassword" required placeholder="Repeat password" ng-pattern="userReg.confirmPassword == userReg.password" name="repeat">
+                                {{registerForm.repeat.$error.pattern}}
                             </div>
                             <button type="submit" class="register-button" ng-disabled="userReg.confirmPassword.$invalid">Register</button>
                         </form>
