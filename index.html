@@ -71,10 +71,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="regrepeatpassword">Repeat password</label>
-                                <input type="password" class="form-control" id="regrepeatpassword" compare-to="userReg.password" ng-model="userReg.confirmPassword" required placeholder="Repeat password" ng-pattern="userReg.confirmPassword == userReg.password" name="repeat">
-                                {{registerForm.repeat.$error.pattern}}
+                                <input type="password" class="form-control" id="regrepeatpassword" compare-to="userReg.password" ng-model="userReg.confirmPassword" required placeholder="Repeat password"  name="repeat">
+                                <div ng-if="!userReg.confirmPassword == userReg.password" class="alert alert-danger">
+                                    <p>
+                                        Not correct
+                                    </p>
+                                </div>
                             </div>
-                            <button type="submit" class="register-button" ng-disabled="userReg.confirmPassword.$invalid">Register</button>
+                            <button type="submit" class="register-button" ng-disabled="userReg.confirmPassword == userReg.password">Register</button>
                         </form>
                     </div>
                 </div>
