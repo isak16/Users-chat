@@ -5,70 +5,80 @@
         	"email": "Baquai@test.se",
         	"display_name": "Jakob Johansson",
         	"password": "1234",
-        	"chats": [101,102,107,108]
+        	"chats": [101,102,107,108],
+         "avatar": "http://www.avatarsdb.com/avatars/plants_vs_zombies.gif"
         },
         {
         	"id": 2,
         	"email": "isak@test.se",
         	"display_name": "NastyBlonde",
         	"password": "1234",
-        	"chats": [101,108,109]
+        	"chats": [101,108,109],
+         "avatar": "http://www.avatarsdb.com/avatars/ugly_face.gif"
         },
         {
         	"id": 3,
         	"email": "sebbe@test.se",
         	"display_name": "SebbeKuk",
         	"password": "1234",
-        	"chats": [103,105,108,109,110]
+        	"chats": [103,105,108,109,110],
+         "avatar": "http://www.avatarsdb.com/avatars/acrobat.gif"
         },
         {
         	"id": 4,
         	"email": "rebecka@test.se",
         	"display_name": "BeCCizz",
         	"password": "1234",
-        	"chats": [102,105,108,109]
+        	"chats": [102,105,108,109],
+         "avatar": "http://www.avatarsdb.com/avatars/pc_user.gif"
         },
         {
         	"id": 5,
         	"email": "ErikTL@test.se",
         	"display_name": "Erik Lennsröm",
         	"password": "1234",
-        	"chats": [103,108,111,114]
+        	"chats": [103,108,111,114],
+         "avatar": "http://www.avatarsdb.com/avatars/fighting_funny.gif"
         },
         {
         	"id": 6,
         	"email": "oskar@test.se",
         	"display_name": "OgiZiZHZz",
         	"password": "1234",
-        	"chats": [104,108,110]
+        	"chats": [104,108,110],
+         "avatar": "http://www.avatarsdb.com/avatars/plants_vs_zombies.gif"
         },
         {
         	"id": 7,
         	"email": "Olle@test.se",
         	"display_name": "Olle Jonsson",
         	"password": "1234",
-        	"chats": [106,108,112]
+        	"chats": [106,108,112],
+         "avatar": "http://www.avatarsdb.com/avatars/plants_vs_zombies.gif"
         },
         {
         	"id": 8,
         	"email": "Sven@test.se",
         	"display_name": "Sven Jonsson",
         	"password": "1234",
-        	"chats": [106,108,111,112]
+        	"chats": [106,108,111,112],
+         "avatar": "http://www.avatarsdb.com/avatars/plants_vs_zombies.gif"
         },
         {
         	"id": 9,
         	"email": "Lisa@test.se",
         	"display_name": "Lisa",
         	"password": "1234",
-        	"chats": [108,111,113]
+        	"chats": [108,111,113],
+         "avatar": "http://www.avatarsdb.com/avatars/drift_n_burn.jpg"
         },
         {
         	"id": 10,
         	"email": "Izzie@test.se",
         	"display_name": "Queen Izzie",
         	"password": "1234",
-        	"chats": [108,113,114]
+        	"chats": [108,113,114],
+         "avatar": "http://www.avatarsdb.com/avatars/legend_of_zelda.jpg"
         }
     ],
     "conversations": [
