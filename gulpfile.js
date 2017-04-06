@@ -21,6 +21,6 @@ gulp.task('concat', function(){
 
 gulp.task('watch', function () {
   gulp.watch('./assets/scss/*.scss', ['sass']);
-  gulp.watch('./assets/js/*.js', ['concat']);
+  gulp.watch('./assets/js/**/*.js', ['concat']);
 });
 gulp.task('default', ['sass', 'concat', 'watch']);

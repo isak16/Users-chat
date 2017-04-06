@@ -1,0 +1,76 @@
+
+<div class="app-login">
+   <div class="container-fluid" ng-controller="register">
+       <div class="row" ng-if="loggedIn">
+            <div class="col-xs-12 login-header text-center">
+                <img src="assets/img/logga_gif.gif">
+                <h1 class="logo">Users chat</h1>
+
+            </div>
+       </div>
+       <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 login-window">
+                <h1>Login now</h1>
+                <h2>Unicorns be waiting</h2>
+                <form class="form-inline" name="myForm" id="login-form" ng-submit="login(userLogin)" method="post" novalidate>
+                    <div class="form-group" style="position:relative;">
+                        <label class="sr-only" for="username">Username</label>
+
+                        <input type="email" class="form-control hint--top" aria-label="Thank you!" id="username" name="username" placeholder="E-mail" ng-model="userLogin.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="userLogin.password" required>
+                    </div>
+                    <button type="submit" class="login-button" ng-disabled="myForm.$invalid">Sign in</button>
+                </form>
+                <p>Don't have an account?</p>
+                <a href="#" onclick="openRegisterTab()">Create account <span class="caret"></span></a>
+                <div id="app-register">
+                    <h3>So you wanna be a rocket scientist huh?</h3>
+                    <p>Let's see what we can do. We'll need some information first though.</p>
+                    <div class="col-sm-8 col-sm-offset-2 col-lg-4 col-lg-offset-4 text-left">
+                        <form id="register-form" ng-submit="register(userReg)" method="post" novalidate name="registerForm">
+                            <div class="form-group">
+                                <label for="regusername">Display name</label>
+                                <input type="text" class="form-control" id="regusername" placeholder="Display name" ng-model="userReg.display_name" name="username" ng-pattern="/^[a-zA-Z0-9]{1,}$/" ng-minlength="2" ng-maxlength="10">
+                                <div ng-if="registerForm.username.$error.pattern || registerForm.username.$error.minlength || registerForm.username.$error.maxlength && registerForm.username.$touched" class="alert alert-danger regValid">
+                                        <p>
+                                            Only numbers and letters and 2-10 characters allowed.
+                                        </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="regemail">Email</label>
+                                <input type="email" class="form-control" id="regemail" placeholder="Email" ng-model="user.email" name="email">
+                                <div ng-if="registerForm.email.$error.email == true" class="alert alert-danger regValid">
+                                    Not a proper e-mail.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="regpassword">Password</label>
+                                <input type="password" class="form-control" id="regpassword" placeholder="Password" ng-model="user.password" name="password" ng-pattern="/^\S{1,}$/" ng-trim="false"  ng-minlength="5">
+                                <div ng-if="registerForm.password.$error.pattern == true || registerForm.password.$error.minlength == true" class="alert alert-danger">
+                                    <p>
+                                        Atleast 5 characters. No spaces allowed.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="regrepeatpassword">Repeat password</label>
+                                <input type="password" class="form-control" id="regrepeatpassword" compare-to="user.password" ng-model="confirmRepeat" required placeholder="Repeat password"  name="repeat" ng-pattern="user.password">
+                                {{registerForm.repeat.$error.pattern}}
+                                <div ng-if="registerForm.repeat.$error.pattern" class="alert alert-danger">
+                                    <p>
+                                        Not correct
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="submit" class="register-button" ng-disabled="registerForm.$invalid">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+       </div>
+   </div>
+</div>

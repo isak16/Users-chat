@@ -4,7 +4,7 @@ var express = require("express");
 var app = express();
 
 //Mongoose Connect
-mongoose.connect('mongodb://localhost:27017/userschat');
+mongoose.connect('mongodb://localhost:27017/users-chat');
 
 //Definera databas
 var db = mongoose.connection;

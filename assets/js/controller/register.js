@@ -24,3 +24,7 @@ app.controller('register', function($scope, api){
     };
 
 });
+
+app.controller('startPage', function($scope){
+   $scope.loggedIn = false;
+});
