@@ -10,6 +10,13 @@ var conversations = db.collection("conversations");
 
 app.use(bodyParser.json());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 /**************************************************
  * API:
  * 1. Miscellaneous and middleware ( authorize, login, register )
@@ -27,12 +34,13 @@ app.use(bodyParser.json());
  ////////////////////////////////////////
 
 app.post("/login", function(request, response) {
+    console.log(request.body.email + request.body.password);
     users.findOne({email: request.body.email, password: request.body.password}, function(error, result) {
         if (error) {
             response.status(500).send(error);
             return false;
         }
-        if (result.hasOwnProperty("email") && result.hasOwnProperty("_id")) {
+        if (result) {
             delete result.password;
             response.send(result);
         } else {
@@ -84,16 +92,20 @@ app.get("/users/:id", function(request, response) {
  * @return true|false
  */
 app.post("/users", function(request, response) {
-    users.find({ email: request.body.email }, function(error, result) {
+    console.log("incoming post to users");
+    users.find({ email: request.body.email }).toArray(function(error, result) {
         if (error) {
+            console.log("error");
             response.status(500).send(error);
             return false;
-        } else if (result.length <= 1) {
+        } else if (result.length < 1) {
+            console.log("inserting user");
             users.insertOne(request.body, function(error, result) {
                 if (error) {
                     response.status(500).send(error);
                     return false;
                 } else if (result) {
+                    console.log("user inserted");
                     delete result.password
                     response.send(result);
                 }
@@ -241,3 +253,5 @@ app.put("/conversations/message/:convid", function(request, response) {
         }
     });
 });
+
+app.listen(3000);

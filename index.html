@@ -23,9 +23,9 @@
                 <h2>Unicorns be waiting</h2>
                 <form class="form-inline" name="myForm" id="login-form" ng-submit="login(userLogin)" method="post" novalidate>
                     <div class="form-group" style="position:relative;">
-                        <label class="sr-only" for="username">Username</label>
+                        <label class="sr-only" for="email">Email</label>
                         <p ng-show="myForm.username.$invalid && myForm.username.$touched" class="alert alert-danger" style="position : absolute; top: -55px;">Var vänlig skriv in email</p>
-                        <input type="email" class="form-control hint--top" aria-label="Thank you!" id="username" name="username" placeholder="Username" ng-model="userLogin.email" required>
+                        <input type="email" class="form-control hint--top" aria-label="Thank you!" id="email" name="email" placeholder="Email" ng-model="userLogin.email" required>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="password">Password</label>
@@ -40,11 +40,11 @@
                     <p>Let's see what we can do. We'll need some information first though.</p>
                     <div class="col-sm-8 col-sm-offset-2 col-lg-4 col-lg-offset-4 text-left">
 
-                        <form id="register-form" ng-submit="register(userReg)" novalidate name="registerForm">
+                        <form id="register-form" ng-submit="register(userReg)" method="post" novalidate name="registerForm">
 
                             <div class="form-group">
                                 <label for="regusername">Username</label>
-                                <input type="text" class="form-control" id="regusername" placeholder="Username" ng-model="userReg.userName" name="username" ng-pattern="/^[a-zA-Z0-9]{1,}$/" ng-minlength="2" ng-maxlength="10">
+                                <input type="text" class="form-control" id="regusername" placeholder="Username" ng-model="userReg.username" name="username" ng-pattern="/^[a-zA-Z0-9]{1,}$/" ng-minlength="2" ng-maxlength="10">
 
                                 <div ng-if="registerForm.username.$error.pattern || registerForm.username.$error.minlength || registerForm.username.$error.maxlength" class="alert alert-danger regValid">
                                         <p>

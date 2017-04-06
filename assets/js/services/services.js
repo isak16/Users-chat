@@ -14,8 +14,8 @@ app.factory('api', function($http) {
             update: function(id, updatedUser) {
                 return $http.put(url + "users/" + id, updatedUser);
             },
-            login: function(email, password) {
-                return $http.post(url + "login", { "email": email, "password": password});
+            login: function(loginCredentials) {
+                return $http.post(url + "login", loginCredentials);
             }
         },
         conversations: {
