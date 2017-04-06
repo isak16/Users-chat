@@ -1,6 +1,7 @@
 app.controller('newsSidebar', function ($scope) {
 
     $scope.sideFeed = [
+
         {
             "id": "6e1072d3-dcb3-401b-8532-6061e11e4574",
             "name": "SebeeThörsen",
@@ -224,3 +225,13 @@ document.getElementById("search-button").addEventListener("click", function(e) {
         document.getElementById("sidebar-search").style.opacity = 1;
     }
 });
+
+function setOffline() {
+    document.getElementById("yourStatus").setAttribute("class", "offline");
+}
+function setBusy() {
+    document.getElementById("yourStatus").setAttribute("class", "busy");
+}
+function setOnline() {
+    document.getElementById("yourStatus").setAttribute("class", "online");
+}

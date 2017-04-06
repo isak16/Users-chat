@@ -17,11 +17,16 @@
             </div>
         </div>
         <div class="sidebar-profile-section">
-            <img src="assets/img/jobs.png" alt="">
+            <img src="assets/img/jobs.png" alt="" onclick="setStatus()" class="online" id="yourStatus">
             <div class="profile-text">
                 <span>Sebastian Thorsen</span>
                 <p>@thorsen78</p>
                 <a ui-sref="settingsProfile" class="fa fa-cogs" aria-hidden="true"></a>
+            </div>
+            <div id="set-status">
+                <div id="offline" onclick="setOffline()"></div>
+                <div id="busy" onclick="setBusy()"></div>
+                <div id="online" onclick="setOnline()"></div>
             </div>
         </div>
         <div ng-controller="newsSidebar" id="sidebar-feed">
@@ -64,5 +69,15 @@
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="dist/all.js"></script>
 <script src="assets/js/sidebar.js"></script>
+<script>
+    function setStatus () {
+        var setstatus = document.getElementById('set-status');
+        if (setstatus.style.display === 'block') {
+            setstatus.style.display = 'none';
+        } else {
+            setstatus.style.display = 'block';
+        }
+    }
+</script>
 </body>
 </html>
