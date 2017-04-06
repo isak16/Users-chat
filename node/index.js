@@ -33,6 +33,7 @@ app.post("/login", function(request, response) {
             return false;
         }
         if (result.hasOwnProperty("email") && result.hasOwnProperty("_id")) {
+            delete result.password;
             response.send(result);
         } else {
             response.send("Invalid email / password");
@@ -93,7 +94,8 @@ app.post("/users", function(request, response) {
                     response.status(500).send(error);
                     return false;
                 } else if (result) {
-                    response.send(request.body._id);
+                    delete result.password
+                    response.send(result);
                 }
             });
         }
