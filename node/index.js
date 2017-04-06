@@ -148,7 +148,7 @@ app.put("/users/:id", function(request, response) {
 app.get("/conversations/:userid", function(request, response) {
     // needs to return false if header isn't validated
     conversations.find({
-        members: { $in: request.params.userid }
+        members: { $in: [request.params.userid] }
     }).toArray(function(error, result) {
         if (error) {
             response.status(500).send(error);
@@ -168,7 +168,7 @@ app.get("/conversations/:userid", function(request, response) {
  */
 app.get("/conversations/:userid/:convid", function(request, response) {
     conversations.find({
-        members: { $in: request.params.userid },
+        members: { $in: [request.params.userid] },
         _id: request.params.convid
     }, function(error, result) {
         if (error) {
@@ -212,10 +212,10 @@ app.put("/conversations/members/:convid/:action", function(request, response) {
     var _query = {};
     switch (request.params.action) {
         case 'remove':
-            _query = {$pull: {members: request.body.userid}};
+            _query = {$pull: {members: [request.body.userid]}};
         break;
         case 'add':
-            _query = {$push: {members: request.body.userid}};
+            _query = {$push: {members: [request.body.userid]}};
         break;
     }
 
@@ -237,7 +237,7 @@ app.put("/conversations/members/:convid/:action", function(request, response) {
 app.put("/conversations/message/:convid", function(request, response) {
     conversations.updateOne({
         _id: request.params.convid,
-        members: { $in: request.body.userid }
+        members: { $in: [request.body.userid] }
     },
     {
         messages: { $push: {
