@@ -148,7 +148,7 @@ app.put("/users/:id", function(request, response) {
 app.get("/conversations/:userid", function(request, response) {
     // needs to return false if header isn't validated
     conversations.find({
-        members: { $in: request.params.userid }
+        members: { "$in" :  [parseInt(request.params.userid)]}
     }).toArray(function(error, result) {
         if (error) {
             response.status(500).send(error);

@@ -213,7 +213,9 @@ app.controller('newsSidebar', function ($scope, api) {
             "messages": [{from:3366, message: "HEj nuub"}, {from:6666, message: "Lel du kan vara nuub"}]
         }
     ];
-    console.log(api.sidebar.get(3));
+    api.sidebar.get(3).then(function (response) {
+        $scope.sideFeed1 = response.data.entries;
+    });
 });
 
 
