@@ -78,6 +78,16 @@ html, body { height: 100%; width: 100%; margin: 0; }
         height: 55px;
         width: 55px;
         border-radius: 50%;
+
+        &.online {
+            box-shadow: 0px 0px 4px $primaryUserOnlineColor;
+        }
+        &.offline {
+            box-shadow: 0px 0px 2px 1px #e5001d;
+        }
+        &.busy {
+            box-shadow: 0px 0px 2px 1px #ff5000;
+        }
     }
     .profile-text {
         line-height: 19px;
@@ -92,7 +102,36 @@ html, body { height: 100%; width: 100%; margin: 0; }
             top: 130px;
         }
     }
+    #set-status {
+        display: none;
+        float: left;
+        padding: 6px;
+        position: absolute;
+
+        #offline {
+            border-radius: 100px;
+            background-color: #e5001d;
+            height: 18px;
+            margin: 4px 0;
+            width: 18px;
+        }
+        #busy {
+            border-radius: 100px;
+            background-color: #ff5000;
+            height: 18px;
+            margin: 4px 0;
+            width: 18px;
+        }
+        #online {
+            border-radius: 100px;
+            background-color: $primaryUserOnlineColor;
+            height: 18px;
+            margin: 4px 0;
+            width: 18px;
+        }
+    }
 }
+
 
 .sidebar-bottom-icons {
     display: table-row;
