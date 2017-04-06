@@ -1,5 +1,7 @@
 app.run(function($rootScope) {
     $rootScope.users = [];
+    $rootScope.lightTheme = false;
+    $rootScope.users = [];
 });
 
 app.controller('register', function($scope, api){
@@ -26,5 +28,5 @@ app.controller('register', function($scope, api){
 });
 
 app.controller('startPage', function($scope){
-   $scope.loggedIn = false;
+   $scope.loggedIn = true;
 });

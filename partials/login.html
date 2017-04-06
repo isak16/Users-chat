@@ -1,7 +1,7 @@
 
 <div class="app-login">
    <div class="container-fluid" ng-controller="register">
-       <div class="row" ng-if="loggedIn">
+       <div class="row">
             <div class="col-xs-12 login-header text-center">
                 <img src="assets/img/logga_gif.gif">
                 <h1 class="logo">Users chat</h1>
@@ -74,3 +74,15 @@
        </div>
    </div>
 </div>
+<script>
+
+function setStatus () {
+    var setstatus = document.getElementById('set-status');
+    if (setstatus.style.display === 'block') {
+        setstatus.style.display = 'none';
+    } else {
+        setstatus.style.display = 'block';
+    }
+}
+
+</script>

@@ -14,7 +14,7 @@ html, body { height: 100%; width: 100%; margin: 0; }
 }
 
 #page-content-wrapper {
-    height: 100%;
+    height: 100vh;
     background-color: $primaryBgColor;
     padding-left: $sidebarWidth;
     padding-right: 0;

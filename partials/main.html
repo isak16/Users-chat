@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html ng-app="app" lang="en" id="sidebar-html">
-<head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body id="sidenav-body" ng-class="{ light: lightTheme }">
 <div id="wrapper-all-content">
     <div id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -31,7 +21,7 @@
         </div>
         <div ng-controller="newsSidebar" id="sidebar-feed">
             <section class="sidebar-feed">
-                <div ng-repeat="messageItem in sideFeed1">
+                <div ng-repeat="messageItem in sideFeed">
                     <article class="sidebar-single-feed">
                         <a ui-sref="chat({chatId: messageItem.id})">
                         <img src="{{ messageItem.picture }}" alt="">
@@ -60,24 +50,3 @@
         <ui-view></ui-view>
     </div>
 </div>
-
-
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="dist/all.js"></script>
-<script src="assets/js/sidebar.js"></script>
-<script>
-    function setStatus () {
-        var setstatus = document.getElementById('set-status');
-        if (setstatus.style.display === 'block') {
-            setstatus.style.display = 'none';
-        } else {
-            setstatus.style.display = 'block';
-        }
-    }
-</script>
-</body>
-</html>
