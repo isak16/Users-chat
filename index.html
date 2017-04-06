@@ -21,7 +21,7 @@
             <div class="col-sm-8 col-sm-offset-2 login-window">
                 <h1>Login now</h1>
                 <h2>Unicorns be waiting</h2>
-                <form class="form-inline" name="myForm" id="login-form" ng-submit="login(userLogin)" novalidate>
+                <form class="form-inline" name="myForm" id="login-form" ng-submit="login(userLogin)" method="post" novalidate>
                     <div class="form-group" style="position:relative;">
                         <label class="sr-only" for="username">Username</label>
 
@@ -33,7 +33,6 @@
                     </div>
                     <button type="submit" class="login-button" ng-disabled="myForm.$invalid">Sign in</button>
                 </form>
-                {{hello}}
                 <p>Don't have an account?</p>
                 <a href="#" onclick="openRegisterTab()">Create account <span class="caret"></span></a>
                 <div id="app-register">

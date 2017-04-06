@@ -216,15 +216,15 @@ app.controller('newsSidebar', function ($scope) {
 });
 
 // sidebar search animation
-document.getElementById("search-button").addEventListener("click", function(e) {
-    if (document.getElementById("sidebar-search").style.visibility == "visible") {
-        document.getElementById("sidebar-search").style.visibility = "hidden";
-        document.getElementById("sidebar-search").style.opacity = 0;
-    } else {
-        document.getElementById("sidebar-search").style.visibility = "visible";
-        document.getElementById("sidebar-search").style.opacity = 1;
-    }
-});
+// document.getElementById("search-button").addEventListener("click", function(e) {
+//     if (document.getElementById("sidebar-search").style.visibility == "visible") {
+//         document.getElementById("sidebar-search").style.visibility = "hidden";
+//         document.getElementById("sidebar-search").style.opacity = 0;
+//     } else {
+//         document.getElementById("sidebar-search").style.visibility = "visible";
+//         document.getElementById("sidebar-search").style.opacity = 1;
+//     }
+// });
 
 function setOffline() {
     document.getElementById("yourStatus").setAttribute("class", "offline");
