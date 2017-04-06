@@ -41,9 +41,6 @@ html, body { height: 100%; width: 100%; margin: 0; }
 
     color: white;
     font-family: $primaryFont;
-
-    -webkit-box-shadow: 6px 3px 6px 0 rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 6px 3px 6px 0 rgba(0, 0, 0, 0.75);
     box-shadow: 6px 3px 6px 0 rgba(0, 0, 0, 0.75);
 }
 
@@ -53,8 +50,12 @@ html, body { height: 100%; width: 100%; margin: 0; }
 }
 
 .brand-text-and-logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding-left: 65px;
     height: 100%;
     img {
@@ -71,6 +72,8 @@ html, body { height: 100%; width: 100%; margin: 0; }
 }
 .sidebar-profile-section {
     font-size: 18px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     img {
         margin-top: 19px;
@@ -153,6 +156,27 @@ html, body { height: 100%; width: 100%; margin: 0; }
     line-height: 93px;
     p{
         text-align: center;
+    }
+}
+
+#sidebar-search {
+    -webkit-transition: 0.3s all ease-in;
+    transition: 0.3s all ease-in;
+    visibility: hidden;
+    opacity: 0;
+    display: block;
+    position: fixed;
+    width: $sidebarWidth;
+    bottom: 75px;
+
+    input {
+        width:95%;
+        margin: 0 auto;
+        display: block;
+        color: #000;
+        padding: 5px 7px;
+        border: none;
+        border-radius: 6px;
     }
 }
 
