@@ -100,7 +100,9 @@ app.post("/users", function(request, response) {
             return false;
         } else if (result.length < 1) {
             console.log("inserting user");
-            request.body.group_chats = [];
+            request.body.chats = [];
+            request.body.avatar = [];
+            request.body.status = "offline";
             users.insertOne(request.body, function(error, result) {
                 if (error) {
                     response.status(500).send(error);
@@ -126,7 +128,8 @@ app.put("/users/:id", function(request, response) {
         {
             "display_name": request.body.display_name,
             "email": request.body.email,
-            "password": request.body.password
+            "password": request.body.password,
+            "avatar": request.body.avatar
         }, function(error, result) {
         if (error) {
             response.status(500).send(error);
@@ -148,8 +151,8 @@ app.put("/users/:id", function(request, response) {
 app.get("/conversations/:userid", function(request, response) {
     // needs to return false if header isn't validated
     conversations.find({
-        members: { $in: request.params.userid }
-    }, function(error, result) {
+        members: { "$in" :  [parseInt(request.params.userid)]}
+    }).toArray(function(error, result) {
         if (error) {
             response.status(500).send(error);
             return false;
@@ -168,7 +171,7 @@ app.get("/conversations/:userid", function(request, response) {
  */
 app.get("/conversations/:userid/:convid", function(request, response) {
     conversations.find({
-        members: { $in: request.params.userid },
+        members: { $in: [request.params.userid] },
         _id: request.params.convid
     }, function(error, result) {
         if (error) {
@@ -191,7 +194,7 @@ app.post("/conversations", function(request, response) {
     }
 
     if (!request.body.hasOwnProperty("last_timestamp")) {
-        request.body.last_timestamp = new Date();
+        request.body.last_timestamp = Math.floor(new Date() / 1000);
     }
 
     conversations.insertOne(request.body, function(error, result) {
@@ -212,10 +215,10 @@ app.put("/conversations/members/:convid/:action", function(request, response) {
     var _query = {};
     switch (request.params.action) {
         case 'remove':
-            _query = {$pull: {members: request.body.userid}};
+            _query = {$pull: {members: [request.body.userid]}};
         break;
         case 'add':
-            _query = {$push: {members: request.body.userid}};
+            _query = {$push: {members: [request.body.userid]}};
         break;
     }
 
@@ -237,7 +240,7 @@ app.put("/conversations/members/:convid/:action", function(request, response) {
 app.put("/conversations/message/:convid", function(request, response) {
     conversations.updateOne({
         _id: request.params.convid,
-        members: { $in: request.body.userid }
+        members: { $in: [request.body.userid] }
     },
     {
         messages: { $push: {

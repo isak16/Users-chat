@@ -1,4 +1,4 @@
-app.controller('newsSidebar', function ($scope) {
+app.controller('newsSidebar', function ($scope, api) {
 
     $scope.sideFeed = [
 
@@ -213,7 +213,11 @@ app.controller('newsSidebar', function ($scope) {
             "messages": [{from:3366, message: "HEj nuub"}, {from:6666, message: "Lel du kan vara nuub"}]
         }
     ];
+    api.sidebar.get(3).then(function (response) {
+        $scope.sideFeed1 = response.data.entries;
+    });
 });
+
 
 // sidebar search animation
 // document.getElementById("search-button").addEventListener("click", function(e) {
