@@ -11,8 +11,8 @@ app.factory('api', function($http) {
             remove: function(user) {
                 return $http.delete(url + "users", user);
             },
-            update: function(user) {
-                return $http.put(url + "users", user);
+            update: function(id, updatedUser) {
+                return $http.put(url + "users/" + id, updatedUser);
             },
             login: function(email, password) {
                 return $http.post(url + "login", { "email": email, "password": password});
