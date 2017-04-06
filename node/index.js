@@ -100,6 +100,7 @@ app.post("/users", function(request, response) {
             return false;
         } else if (result.length < 1) {
             console.log("inserting user");
+            request.body.group_chats = [];
             users.insertOne(request.body, function(error, result) {
                 if (error) {
                     response.status(500).send(error);
