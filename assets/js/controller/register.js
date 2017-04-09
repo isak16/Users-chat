@@ -1,8 +1,11 @@
 app.run(function($rootScope, $sessionStorage) {
-    $rootScope.users = [];
-    $rootScope.lightTheme = false;
-    $rootScope.users = [];
-    $rootScope.$storage = $sessionStorage.$default({loggedIn: false});
+    $rootScope.$storage = $sessionStorage.$default(
+        {
+            loggedIn: false,
+            user: {
+                lightTheme: false
+            }
+        });
 });
 
 app.controller('register', function($scope, api, $sessionStorage){
@@ -27,7 +30,6 @@ app.controller('register', function($scope, api, $sessionStorage){
                 $scope.$storage.user = response.data;
                 $scope.$storage.loggedIn = true;
             }
-            console.log($scope.$storage);
         });
     };
     //$scope.userRegex = /^[a-zA-Z0-9]{1,}$/.test($scope.registerForm.username);

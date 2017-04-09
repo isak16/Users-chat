@@ -11,7 +11,10 @@ var userSchema = new Schema({
     email: String,
     password: String,
     avatar: String,
-    chats: Array
+    chats: Array,
+    status: String,
+    bio: String,
+    lightTheme: Boolean
 });
 
 var users = mongoose.model("user", userSchema);
@@ -105,9 +108,6 @@ app.post("/users", function(request, response) {
             response.status(500).send(error);
             return false;
         } else if (result.length < 2) {
-            request.body.chats = [];
-            request.body.avatar = [];
-            request.body.status = "offline";
             var newUser = new users(request.body);
             newUser.save(function(error, result) {
                 if (error) {
@@ -129,14 +129,7 @@ app.post("/users", function(request, response) {
  * @return Object|false
  */
 app.put("/users/:id", function(request, response) {
-    users.updateOne(
-        { _id: request.params.id },
-        {
-            "display_name": request.body.display_name,
-            "email": request.body.email,
-            "password": request.body.password,
-            "avatar": request.body.avatar
-        }, function(error, result) {
+    users.findByIdAndUpdate(request.params.id, request.body, function(error, result) {
         if (error) {
             response.status(500).send(error);
             return false;

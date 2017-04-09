@@ -1,5 +1,6 @@
-app.factory('api', function($http) {
+app.factory('api', function($http, $sessionStorage) {
     var url = "http://localhost:3000/";
+    var $storage = $sessionStorage
     return {
         users: {
             get: function(id) {
@@ -11,8 +12,10 @@ app.factory('api', function($http) {
             remove: function(user) {
                 return $http.delete(url + "users", user);
             },
-            update: function(id, updatedUser) {
-                return $http.put(url + "users/" + id, updatedUser);
+            update: function() {
+                return $http.put(url + "users/" + $storage.user._id, $storage.user).then(function(response) {
+                    $storage.user = response.data;
+                });
             },
             login: function(loginCredentials) {
                 return $http.post(url + "login", loginCredentials);

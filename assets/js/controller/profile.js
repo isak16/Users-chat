@@ -1,9 +1,5 @@
-app.run(function($rootScope) {
-$rootScope.lightTheme = false;
-$rootScope.users = [];
-});
-
-app.controller('settingsProfile' , function ($scope, $document) {
+app.controller('settingsProfile' , function ($scope, $document, $sessionStorage, api) {
+    $scope.$storage = $sessionStorage;
     $scope.imgSrc = 'assets/img/jobs.png';
     $scope.showName = 'Visningsnamn';
     $scope.userName = 'Username';
@@ -14,4 +10,8 @@ app.controller('settingsProfile' , function ($scope, $document) {
 
 
     };
+
+    $scope.updateSettings = function() {
+        api.users.update();
+    }
 });
