@@ -1,11 +1,20 @@
 var express = require("express");
 var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 var bodyParser = require("body-parser");
 var app = express();
 
 mongoose.connect("mongodb://localhost:27017/users-chat");
 var db = mongoose.connection;
-var users = db.collection("users");
+var userSchema = new Schema({
+    display_name: String,
+    email: String,
+    password: String,
+    avatar: String,
+    chats: Array
+});
+
+var users = mongoose.model("user", userSchema);
 var conversations = db.collection("conversations");
 
 app.use(bodyParser.json());
@@ -34,14 +43,12 @@ app.use(function(req, res, next) {
  ////////////////////////////////////////
 
 app.post("/login", function(request, response) {
-    console.log(request.body.email + request.body.password);
-    users.findOne({email: request.body.email, password: request.body.password}, function(error, result) {
+    users.findOne({email: request.body.email, password: request.body.password}, {password: false}).exec(function(error, result) {
         if (error) {
             response.status(500).send(error);
             return false;
         }
         if (result) {
-            delete result.password;
             response.send(result);
         } else {
             response.send("Invalid email / password");
@@ -59,7 +66,7 @@ app.post("/login", function(request, response) {
  * @return Object
  */
 app.get("/users", function(request, response) {
-    users.find().toArray(function(error, result) {
+    users.find().exec(function(error, result) {
         if (error) {
             response.status(500).send(error);
             return;
@@ -77,12 +84,13 @@ app.get("/users", function(request, response) {
  * @return Object
  */
 app.get("/users/:id", function(request, response) {
-    users.findOne({ _id: request.params.id }, function(error, result) {
+    users.findById(request.params.id).exec(function(error, result) {
         if (error) {
             response.status(500).send(error);
             return;
         }
         response.send(result);
+        console.log(result);
     });
 });
 
@@ -92,14 +100,11 @@ app.get("/users/:id", function(request, response) {
  * @return true|false
  */
 app.post("/users", function(request, response) {
-    console.log("incoming post to users");
-    users.find({ email: request.body.email }).toArray(function(error, result) {
+    users.find({ email: request.body.email }).exec(function(error, result) {
         if (error) {
-            console.log("error");
             response.status(500).send(error);
             return false;
         } else if (result.length < 1) {
-            console.log("inserting user");
             request.body.chats = [];
             request.body.avatar = [];
             request.body.status = "offline";
@@ -108,7 +113,6 @@ app.post("/users", function(request, response) {
                     response.status(500).send(error);
                     return false;
                 } else if (result) {
-                    console.log("user inserted");
                     delete result.password
                     response.send(result);
                 }

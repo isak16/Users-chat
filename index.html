@@ -10,9 +10,9 @@
 <body id="sidenav-body" ng-class="{ light: lightTheme }">
    <div ng-controller="startPage">
       <div>
-         <div ng-if="!loggedIn" ng-include src="'partials/login.html'">
+         <div ng-if="!$storage.loggedIn" ng-include src="'partials/login.html'">
          </div>
-         <div ng-if="loggedIn" ng-include src="'partials/main.html'">
+         <div ng-if="$storage.loggedIn" ng-include src="'partials/main.html'">
          </div>
       </div>
    </div>
@@ -21,6 +21,7 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 <script src="dist/all.js"></script>
 </body>
 </html>
