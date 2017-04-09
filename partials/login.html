@@ -75,6 +75,14 @@
    </div>
 </div>
 <script>
+function openRegisterTab() {
+       var appregister = document.getElementById("app-register");
+       if (appregister.style.display === "block") {
+           appregister.style.display = "none";
+       } else {
+           appregister.style.display = "block";
+       }
+   }
 
 function setStatus () {
     var setstatus = document.getElementById('set-status');

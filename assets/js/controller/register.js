@@ -8,12 +8,15 @@ app.run(function($rootScope, $sessionStorage) {
 app.controller('register', function($scope, api, $sessionStorage){
     var user = {};
     $scope.register = function(userReg){
-
             delete userReg.confirmPassword;
             api.users.add(userReg).then(function (response) {
-                console.log("added user: " + response);
+                if (response.data.hasOwnProperty("_id")) {
+                    $sessionStorage.user = response.data;
+                    $sessionStorage.loggedIn = true;
+                } else {
+                    console.log(response.data);
+                }
             });
-
     };
 
     $scope.login = function(userLogin){

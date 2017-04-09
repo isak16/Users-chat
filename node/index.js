@@ -104,19 +104,21 @@ app.post("/users", function(request, response) {
         if (error) {
             response.status(500).send(error);
             return false;
-        } else if (result.length < 1) {
+        } else if (result.length < 2) {
             request.body.chats = [];
             request.body.avatar = [];
             request.body.status = "offline";
-            users.insertOne(request.body, function(error, result) {
+            var newUser = new users(request.body);
+            newUser.save(function(error, result) {
                 if (error) {
                     response.status(500).send(error);
                     return false;
                 } else if (result) {
-                    delete result.password
                     response.send(result);
                 }
             });
+        } else {
+            response.send("Email is already registered.");
         }
     });
 });
