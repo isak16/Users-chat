@@ -6,13 +6,14 @@ app.run(function($rootScope, $sessionStorage) {
 });
 
 app.controller('register', function($scope, api, $sessionStorage){
+    $scope.$storage = $sessionStorage;
     var user = {};
     $scope.register = function(userReg){
             delete userReg.confirmPassword;
             api.users.add(userReg).then(function (response) {
                 if (response.data.hasOwnProperty("_id")) {
-                    $sessionStorage.user = response.data;
-                    $sessionStorage.loggedIn = true;
+                    $scope.$storage.user = response.data;
+                    $scope.$storage.loggedIn = true;
                 } else {
                     console.log(response.data);
                 }
@@ -23,9 +24,10 @@ app.controller('register', function($scope, api, $sessionStorage){
         api.users.login(userLogin).then(function(response) {
             console.log(response);
             if (response.data.hasOwnProperty("_id")) {
-                $sessionStorage.user = response.data;
-                $sessionStorage.loggedIn = true;
+                $scope.$storage.user = response.data;
+                $scope.$storage.loggedIn = true;
             }
+            console.log($scope.$storage);
         });
     };
     //$scope.userRegex = /^[a-zA-Z0-9]{1,}$/.test($scope.registerForm.username);

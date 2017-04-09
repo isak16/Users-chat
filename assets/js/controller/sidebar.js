@@ -1,5 +1,5 @@
-app.controller('newsSidebar', function ($scope, api) {
-
+app.controller('newsSidebar', function ($scope, api, $sessionStorage) {
+    $scope.$storage = $sessionStorage;
     $scope.sideFeed = [
 
         {
@@ -216,6 +216,11 @@ app.controller('newsSidebar', function ($scope, api) {
     api.sidebar.get(3).then(function (response) {
         $scope.sideFeed1 = response.data.entries;
     });
+
+    $scope.logOut = function() {
+        delete $scope.$storage.user;
+        $scope.$storage.loggedIn = false;
+    }
 });
 
 

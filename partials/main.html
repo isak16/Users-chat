@@ -1,5 +1,5 @@
 <div id="wrapper-all-content">
-    <div id="sidebar-wrapper">
+    <div id="sidebar-wrapper" ng-controller="newsSidebar">
         <div class="sidebar-brand">
             <div class="brand-text-and-logo">
                 <img src="assets/img/unicorn.png" alt="">
@@ -9,8 +9,8 @@
         <div class="sidebar-profile-section">
             <img src="assets/img/jobs.png" alt="" onclick="setStatus()" class="online" id="yourStatus">
             <div class="profile-text">
-                <span>Sebastian Thorsen</span>
-                <p>@thorsen78</p>
+                <span>{{$storage.user.display_name}}</span>
+                <p>{{$storage.user.email}}</p>
                 <a ui-sref="settingsProfile" class="fa fa-cogs" aria-hidden="true"></a>
             </div>
             <div id="set-status">
@@ -19,7 +19,7 @@
                 <div id="online" onclick="setOnline()"></div>
             </div>
         </div>
-        <div ng-controller="newsSidebar" id="sidebar-feed">
+        <div id="sidebar-feed">
             <section class="sidebar-feed">
                 <div ng-repeat="messageItem in sideFeed">
                     <article class="sidebar-single-feed">
@@ -40,7 +40,7 @@
             <a ui-sref="feed"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a>
             <a href="#" id="search-button"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a>
             <a href="#"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
+            <a href="#" ng-click="logOut()"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
         </div>
     </div>
 
