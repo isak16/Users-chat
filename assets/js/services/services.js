@@ -13,9 +13,7 @@ app.factory('api', function($http, $sessionStorage) {
                 return $http.delete(url + "users", user);
             },
             update: function() {
-                return $http.put(url + "users/" + $storage.user._id, $storage.user).then(function(response) {
-                    $storage.user = response.data;
-                });
+                return $http.put(url + "users/" + $storage.user._id, $storage.user);
             },
             login: function(loginCredentials) {
                 return $http.post(url + "login", loginCredentials);

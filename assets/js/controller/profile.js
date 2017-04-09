@@ -12,6 +12,8 @@ app.controller('settingsProfile' , function ($scope, $document, $sessionStorage,
     };
 
     $scope.updateSettings = function() {
-        api.users.update();
+        api.users.update().then(function(response) {
+            $scope.$storage.user = response.data;
+        });
     }
 });
