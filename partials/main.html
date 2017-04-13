@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="sidebar-profile-section">
-            <img src="assets/img/jobs.png" alt="" onclick="setStatus()" class="online" id="yourStatus">
+            <img ng-src="{{$storage.user.avatar}}" alt="" onclick="setStatus()" class="online" id="yourStatus">
             <div class="profile-text">
                 <span>{{$storage.user.display_name}}</span>
                 <p>{{$storage.user.email}}</p>
@@ -24,16 +24,16 @@
                 <div ng-repeat="messageItem in sideFeed">
                     <article class="sidebar-single-feed">
                         <a ui-sref="chat({chatId: messageItem.id})">
-                        <img src="{{ messageItem.picture }}" alt="">
-                        <p>{{messageItem.name}}</p>
+                        <img ng-src="{{ messageItem.avatar }}" alt="">
+                        <p>{{messageItem.display_name}}</p>
                         </a>
                     </article>
                 </div>
             </section>
         </div>
         <div id="sidebar-search">
-            <form>
-                <input type="search" placeholder="Search for usernames and conversations..." />
+            <form id="searchform" method="get" novalidate>
+                <input type="search" ng-model="searchquery" ng-change="searchUser(searchquery)" placeholder="Search for usernames and conversations..." />
             </form>
         </div>
         <div class="sidebar-bottom-icons">

@@ -1,6 +1,6 @@
 app.factory('api', function($http, $sessionStorage) {
     var url = "http://localhost:3000/";
-    var $storage = $sessionStorage
+    var $storage = $sessionStorage;
     return {
         users: {
             get: function(id) {
@@ -20,19 +20,38 @@ app.factory('api', function($http, $sessionStorage) {
             }
         },
         conversations: {
-            get: function(userid, id) {
-                return $http.get(url + "conversations/" + userid + "/" + id);
+            get: function(id) {
+                return $http.get(url + "conversations/" + $storage.user._id + "/" + id);
             },
             add: function(conversation) {
                 return $http.post(url + "conversations", conversation);
             },
             remove: function(id) {
                 return $http.delete(url + "conversations", conversation);
+            },
+            message: function(id, message) {
+                var msg = {
+                    params: {
+                        userid: $storage.user._id,
+                        convid: id
+                    },
+                    body: message
+                }
+                return socket.emit('message', msg);
+            },
+            update: function(id, updatedObject) {
+                return $http.put(url + "conversations/" + id, updatedObject);
+            },
+            manage: function(id, action, query) {
+                return $http.put(url + "conversations/members/" + action + "/" + id, query);
             }
         },
         sidebar: {
-            get: function(id) {
-                return $http.get(url + "conversations/" + id);
+            get: function() {
+                return $http.get(url + "conversations/" + $storage.user._id);
+            },
+            search: function(query) {
+                return $http.get(url + "users/search/" + query);
             }
         }
     };
