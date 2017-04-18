@@ -131,8 +131,7 @@ section.newsSection {
 
     .newsContainer {
         height: 80px;
-        border-bottom: 2px solid $primaryDividerColor;
-        border-top: 2px solid $primaryDividerColor;
+        border-bottom: 1px solid $primaryDividerColor;
         vertical-align: center;
 
         img.profileImage {
