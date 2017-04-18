@@ -1,6 +1,5 @@
 app.controller('newsSidebar', function ($scope, api, $sessionStorage) {
     $scope.$storage = $sessionStorage;
-    $scope.$storage = $sessionStorage;
     $scope.sideFeed = null;
     api.sidebar.get().then(function (response) {
         $scope.sidebar = response.data.entries;

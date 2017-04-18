@@ -98,7 +98,7 @@ app.post("/login", function(request, response) {
         if (result) {
             response.send(result);
         } else {
-            response.send("Invalid email / password");
+            response.status(401).send("Invalid email / password");
         }
     });
 });

@@ -30,6 +30,10 @@ app.controller('register', function($scope, api, $sessionStorage){
                 $scope.$storage.user = response.data;
                 $scope.$storage.loggedIn = true;
             }
+        }, function(response){
+            if (response.status === 401) {
+               $scope.unAuthorized = response.data;
+           }
         });
     };
     //$scope.userRegex = /^[a-zA-Z0-9]{1,}$/.test($scope.registerForm.username);
