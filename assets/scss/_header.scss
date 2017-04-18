@@ -75,6 +75,7 @@ html, body { height: 100%; width: 100%; margin: 0; }
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    padding-bottom: 3%;
     img {
         margin-top: 19px;
         margin-left: 27px;
@@ -188,11 +189,13 @@ html, body { height: 100%; width: 100%; margin: 0; }
     height: calc(100% - 200px);
     overflow-y: scroll;
     overflow-x: hidden;
+    :first-child {
+        margin-top: 0;
+    }
 }
 
 section.sidebar-feed {
     margin-top: 3%;
-
     article.sidebar-single-feed {
         padding: 2.5% 0 2.5% 5%;
         border-top: solid 1px $primaryDividerColor;
