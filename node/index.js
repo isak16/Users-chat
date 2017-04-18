@@ -314,54 +314,18 @@ app.put("/conversations/:convid", function(request, response) {
  * @return true|false
  */
 app.put("/conversations/message/:convid/:userid", function(request, response) {
-    var message = {
+    var _query = {
         from: request.params.userid,
-        content: request.body.message,
+        content: request.body.content,
         date: Math.floor(new Date() / 1000)
     }
-
-    conversations.findOneAndUpdate({
-        members: { $in: [{_id: request.params.userid}] },
-        _id: request.params.convid
-    },
-    { $push: {
-        messages: message
-    }, $set: {
-        last_timestamp: message.date
-    }},
-    function(error, result) {
+    conversations.findByIdAndUpdate(request.params.convid, {$push: {messages: _query}, $set: {last_timestamp: _query.date}}, {new: true}).populate({path: 'messages.from', select: 'display_name avatar _id'}).populate({path: 'members._id', select: 'display_name avatar _id'}).exec(function(error, result) {
         if (error) {
             response.status(500).send(error);
-            return false;
-        } else if (result) {
+            return;
+        }
+        if (result) {
             response.send(result);
-        } else {
-            conversations.findOneAndUpdate({
-                members: { $size: 2, $all: [{_id: request.params.userid}, {_id: request.params.convid}] }
-            },
-            { $push: {
-                messages: message
-            }, $set: {
-                last_timestamp: message.date
-            }},
-            function(error, result) {
-                if (error) {
-                    response.status(500).send(error);
-                } else if (result) {
-                    response.send(result);
-                } else {
-                    var newConv = new conversations({members: [{_id: request.params.userid}, {_id: request.params.convid}], messages: [message], display_name: "New chat"});
-                    newConv.save(function(error, doc) {
-                        if (error) {
-                            response.status(500).send(error);
-                        }
-                        if (doc) {
-                            users.update({_id: { $in: [{_id: request.params.userid}, {_id: request.params.convid}]}}, {$push: {chats: doc._id}}).exec();
-                            response.send(doc);
-                        }
-                    });
-                }
-            });
         }
     });
 });

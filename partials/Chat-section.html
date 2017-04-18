@@ -1,15 +1,15 @@
 <div class="chat-content" auto-resize>
-    <header class="main-content-header row col-xs-12"><p>Messages</p></header>
-    <section class="chatSection row col-xs-12" id="msg" scroll-down="testChat">
+    <header class="main-content-header row col-xs-12"><p>{{loadedChat.display_name}}</p></header>
+    <section class="chatSection row col-xs-12" id="msg" scroll-down="loadedChat">
 
-        <div class="row chatContainer" ng-repeat="n in testChat">
-            <div class="col-xs-12 col-left" ng-if="n.author == 'other'">
-                <img ng-src="{{n.image}}" class="pull-left {{n.status}}">
-                <div class="pmContainer pull-left"><p>{{n.message}}</p></div>
+        <div class="row chatContainer" ng-repeat="n in loadedChat.messages">
+            <div class="col-xs-12 col-left" ng-if="n.from._id != $storage.user._id">
+                <img ng-src="{{n.from.avatar}}" class="pull-left {{n.status}}">
+                <div class="pmContainer pull-left"><p>{{n.content}}</p></div>
             </div>
-            <div class="col-xs-12 col-right" ng-if="n.author == 'you'">
-                <img ng-src="{{n.image}}" class="pull-right {{n.status}}">
-                <div class="pmContainer pull-right"><p>{{n.message}}</p></div>
+            <div class="col-xs-12 col-right" ng-if="n.from._id == $storage.user._id">
+                <img ng-src="{{n.from.avatar}}" class="pull-right {{n.status}}">
+                <div class="pmContainer pull-right"><p>{{n.content}}</p></div>
             </div>
         </div>
     </section>

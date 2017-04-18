@@ -1,39 +1,21 @@
-app.controller('chatSection' , function($scope, api, $state, $stateParams) {
-    /*api.groups.get($stateParams.chatId, function (res, res1) {
-    });*/
-    $scope.testChat = [
-        {author:'you', image: 'assets/img/jobs.png',status: 'online', message:'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'other', image: 'assets/img/other.jpg',status: 'offline', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'other', image: 'assets/img/other.jpg',status: 'offline', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf ,Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'},
-        {author:'you' , image: 'assets/img/jobs.png',status: 'online', message: 'Lorem ipsum dolor loreoreolerela fakjnfaskfkf'}
-    ];
+app.controller('chatSection' , function($scope, api, $state, $stateParams, $interval) {
+    api.conversations.get($stateParams.chatId).then(function(response) {
+        $scope.loadedChat = response.data;
+    });
+    $interval(function() {
+        api.conversations.get($stateParams.chatId).then(function(response) {
+            $scope.loadedChat = response.data;
+        });
+    }, 1000);
+
     $scope.send = function(a){
         if (a == null || a == "") {
             return false;
         }
-        var content = {
-            author:'you',
-            image: 'assets/img/jobs.png',
-            status: 'online',
-            message: a
-        };
-        $scope.testChat.push(content);
+        api.conversations.message($stateParams.chatId, a).then(function(response) {
+            $scope.loadedChat = response.data;
+            console.log($scope.loadedChat);
+        });
         $scope.content.message = '';
     };
 
