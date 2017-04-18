@@ -42,14 +42,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="regemail">Email</label>
-                                <input type="email" class="form-control" id="regemail" placeholder="Email" ng-model="user.email" name="email">
+                                <input type="email" class="form-control" id="regemail" placeholder="Email" ng-model="userReg.email" name="email">
                                 <div ng-if="registerForm.email.$error.email == true" class="alert alert-danger regValid">
                                     Not a proper e-mail.
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="regpassword">Password</label>
-                                <input type="password" class="form-control" id="regpassword" placeholder="Password" ng-model="user.password" name="password" ng-pattern="/^\S{1,}$/" ng-trim="false"  ng-minlength="5">
+                                <input type="password" class="form-control" id="regpassword" placeholder="Password" ng-model="userReg.password" name="password" ng-pattern="/^\S{1,}$/" ng-trim="false"  ng-minlength="5">
                                 <div ng-if="registerForm.password.$error.pattern == true || registerForm.password.$error.minlength == true" class="alert alert-danger">
                                     <p>
                                         Atleast 5 characters. No spaces allowed.
@@ -58,7 +58,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="regrepeatpassword">Repeat password</label>
-                                <input type="password" class="form-control" id="regrepeatpassword" compare-to="user.password" ng-model="confirmRepeat" required placeholder="Repeat password"  name="repeat" ng-pattern="user.password">
+                                <input type="password" class="form-control" id="regrepeatpassword" compare-to="userReg.password" ng-model="confirmRepeat" required placeholder="Repeat password"  name="repeat" ng-pattern="userReg.password">
                                 {{registerForm.repeat.$error.pattern}}
                                 <div ng-if="registerForm.repeat.$error.pattern" class="alert alert-danger">
                                     <p>
