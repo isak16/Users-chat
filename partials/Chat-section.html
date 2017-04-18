@@ -4,11 +4,11 @@
 
         <div class="row chatContainer" ng-repeat="n in testChat">
             <div class="col-xs-12 col-left" ng-if="n.author == 'other'">
-                <img src="{{n.image}}" class="pull-left {{n.status}}">
+                <img ng-src="{{n.image}}" class="pull-left {{n.status}}">
                 <div class="pmContainer pull-left"><p>{{n.message}}</p></div>
             </div>
             <div class="col-xs-12 col-right" ng-if="n.author == 'you'">
-                <img src="{{n.image}}" class="pull-right {{n.status}}">
+                <img ng-src="{{n.image}}" class="pull-right {{n.status}}">
                 <div class="pmContainer pull-right"><p>{{n.message}}</p></div>
             </div>
         </div>
@@ -21,7 +21,7 @@
             </div>
         </form>
         <div class="icon-wrapper col-xs-2">
-            
+
             <a href="#" class="fa fa-paperclip"></a>
             <a href="#" class="fa fa-smile-o"></a>
         </div>

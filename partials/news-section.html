@@ -7,7 +7,7 @@
             <div ng-repeat="n in fakeNews">
                 <div class="row newsContainer">
                     <div class="col-xs-3">
-                        <img src="{{n.image}}" class="profileImage {{n.status}}">
+                        <img ng-src="{{n.image}}" class="profileImage {{n.status}}">
                     </div>
                     <div class="col-xs-3">
                         <p>{{n.author}}</p>
@@ -23,4 +23,3 @@
         </div>
 
     </section>
-

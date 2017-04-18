@@ -350,7 +350,7 @@ app.put("/conversations/message/:convid/:userid", function(request, response) {
                 } else if (result) {
                     response.send(result);
                 } else {
-                    var newConv = new conversations({members: [{_id: request.params.userid}, {_id: request.params.convid}], messages: [message]});
+                    var newConv = new conversations({members: [{_id: request.params.userid}, {_id: request.params.convid}], messages: [message], display_name: "New chat"});
                     newConv.save(function(error, doc) {
                         if (error) {
                             response.status(500).send(error);
