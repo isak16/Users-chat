@@ -1,25 +1,26 @@
-
-    <section class="newsSection">
-        <div class="container-fluid">
-            <div class="row">
-                <header class="main-content-header col-xs-12"><p>Messages</p></header>
-            </div>
-            <div ng-repeat="n in fakeNews">
-                <div class="row newsContainer">
+<section class="newsSection">
+    <div class="container-fluid">
+        <div class="row">
+            <header class="main-content-header col-xs-12"><p>Messages</p></header>
+        </div>
+        <div ng-repeat="n in messageHistory | orderBy: '-last_timestamp'">
+            <div class="row newsContainer">
+                <a ui-sref="chat({chatId: n._id})">
                     <div class="col-xs-3">
-                        <img ng-src="{{n.image}}" class="profileImage {{n.status}}">
+                        <img ng-src="{{n.avatar}}" class="profileImage {{n.status}}">
                     </div>
                     <div class="col-xs-3">
-                        <p>{{n.author}}</p>
+                        <p>{{n.display_name}}</p>
                     </div>
                     <div class="col-xs-3 text-center">
-                        <p><span>{{n.excerpt}}</span></p>
+                        <p><span>{{n.messages[n.messages.length-1].content}}</span></p>
                     </div>
                     <div class="col-xs-3 text-right">
-                        <p><span>{{n.time}}</span></p>
+                        <p><span>{{n.last_timestamp*1000 | date:'yyyy-MM-dd HH:mm'}}</span></p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
+    </div>
 
-    </section>
+</section>
