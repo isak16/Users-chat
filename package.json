@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/isak16/Users-chat#readme",
   "dependencies": {
+    "bower": "*",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "gulp": "^3.9.1",
