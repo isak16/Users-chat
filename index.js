@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var bodyParser = require("body-parser");
 var app = express();
+var path = require("path");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/users-chat");
 var db = mongoose.connection;
@@ -88,6 +89,10 @@ conversations.findOneAndUpdate({_id: "58e629b3c5dd18eb286d12d6"}, {$setOnInsert:
  ////////////////////////////////////////
  //////////// 1. Misc ///////////////////
  ////////////////////////////////////////
+
+// serve files
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.post("/login", function(request, response) {
     users.findOne({email: request.body.email, password: request.body.password}, {password: false}).exec(function(error, result) {
