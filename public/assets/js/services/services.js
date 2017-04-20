@@ -1,5 +1,5 @@
 app.factory('api', function($http, $sessionStorage) {
-    var url = "http://localhost:3000/";
+    var url = "https://userschat.herokuapp.com/";
     var $storage = $sessionStorage;
     return {
         users: {
