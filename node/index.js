@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var bodyParser = require("body-parser");
 var app = express();
 
-mongoose.connect("mongodb://localhost:27017/users-chat");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/users-chat");
 var db = mongoose.connection;
 console.log('SERVER HAS FUCKING STARTED')
 /**
@@ -353,4 +353,4 @@ app.put("/conversations/members/:action/:convid", function(request, response) {
     })
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
