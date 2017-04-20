@@ -1,5 +1,52 @@
+<div class="modal fade" id="chatModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{loadedChat.display_name}}</h4>
+            </div>
+            <form method="put" name="updateChatForm" novalidate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Display name</label>
+                        <input type="text" class="form-control" ng-model="loadedChat.display_name" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Avatar</label>
+                        <input type="url" class="form-control" ng-model="loadedChat.avatar" />
+                    </div>
+                    <div class="form-group">
+                        <label>Members</label>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="n in loadedChat.members">
+                                <i class="fa fa-times" aria-hidden="true" ng-click="removeUserFromChat(n._id._id)"></i>&nbsp;
+                                {{n._id.display_name}}
+                            </li>
+                            <li class="list-group-item">
+                                <input type="text" class="form-control" placeholder="type a member to add" ng-model="tempMember" ng-change="checkMember()" />
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="finder.length > 0">
+                                    <li ng-repeat="n in finder">
+                                        <a href="" ng-click="addUserToChat(n)">@{{n.display_name}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Save" ng-click="updateConversation()" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="chat-content" auto-resize>
-    <header class="main-content-header row col-xs-12"><p>{{loadedChat.display_name}}</p></header>
+    <header class="main-content-header row col-xs-12">
+        <p>{{loadedChat.display_name}}
+            <a href="" class="text-right chat-options" data-toggle="modal" data-target="#chatModal">Settings</a>
+         </p>
+    </header>
     <section class="chatSection row col-xs-12" id="msg" scroll-down="loadedChat">
 
         <div class="row chatContainer" ng-repeat="n in loadedChat.messages">
