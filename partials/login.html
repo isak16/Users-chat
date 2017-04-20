@@ -60,7 +60,6 @@
                             <div class="form-group">
                                 <label for="regrepeatpassword">Repeat password</label>
                                 <input type="password" class="form-control" id="regrepeatpassword" compare-to="userReg.password" ng-model="confirmRepeat" required placeholder="Repeat password"  name="repeat" ng-pattern="userReg.password">
-                                {{registerForm.repeat.$error.pattern}}
                                 <div ng-if="registerForm.repeat.$error.pattern" class="alert alert-danger">
                                     <p>
                                         Not correct
