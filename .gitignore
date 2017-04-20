@@ -1,6 +1,5 @@
 /node_modules
-/bower_components
-/dist
+public/bower_components
 
 assets/css/style.css
 
