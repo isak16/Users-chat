@@ -91,7 +91,8 @@ conversations.findOneAndUpdate({_id: "58e629b3c5dd18eb286d12d6"}, {$setOnInsert:
  ////////////////////////////////////////
 
 // serve files
-app.use('/', express.static(path.join(__dirname, 'public')));
+process.env.PWD = process.cwd()
+app.use(express.static(process.env.PWD + '/public'));
 
 
 app.post("/login", function(request, response) {
