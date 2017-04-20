@@ -21,7 +21,7 @@
         </div>
         <div id="sidebar-feed">
             <section class="sidebar-feed">
-                <div ng-repeat="messageItem in sideFeed">
+                <div ng-repeat="messageItem in sideFeed | orderBy: '-last_timestamp'">
                     <article class="sidebar-single-feed">
                         <a ui-sref="chat({chatId: messageItem._id})">
                         <img ng-src="{{ messageItem.avatar }}" alt="">
