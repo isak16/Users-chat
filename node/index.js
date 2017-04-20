@@ -6,7 +6,7 @@ var app = express();
 
 mongoose.connect("mongodb://localhost:27017/users-chat");
 var db = mongoose.connection;
-
+console.log('Server started');
 /**
  * Schemas for users and conversations
  * @type Schema
