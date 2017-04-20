@@ -1,7 +1,7 @@
 <section class="newsSection">
     <div class="container-fluid">
         <div class="row">
-            <header class="main-content-header col-xs-12"><p>Messages</p></header>
+            <header class="main-content-header col-xs-12"><p>{{$storage.user.display_name}}'s feed</p></header>
         </div>
         <div ng-repeat="n in messageHistory | orderBy: '-last_timestamp'">
             <div class="row newsContainer">
@@ -22,5 +22,4 @@
             </div>
         </div>
     </div>
-
 </section>

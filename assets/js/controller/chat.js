@@ -21,7 +21,8 @@ app.controller('chatSection' , function($scope, api, $state, $stateParams, $inte
 
 });
 
-app.controller('newsSection' , function($scope, api) {
+app.controller('newsSection' , function($scope,$sessionStorage, api) {
+    $scope.$storage = $sessionStorage;
     api.sidebar.get().then(function (response) {
         $scope.messageHistory = response.data.entries;
     });
