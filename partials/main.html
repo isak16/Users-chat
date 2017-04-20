@@ -70,7 +70,6 @@
                             <label for="bio">Members</label>
                             <div class="dropdown">
                                 <input type="text" class="form-control" ng-model="tempMember" ng-change="checkMember()" />
-
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="finder.length > 0">
                                     <li ng-repeat="n in finder">
                                         <a href="" ng-click="addMemberToConversation(n)">@{{n.display_name}}</a>
