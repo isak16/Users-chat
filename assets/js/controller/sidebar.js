@@ -24,6 +24,62 @@ app.controller('newsSidebar', function ($scope, api, $sessionStorage) {
     }
 });
 
+app.controller('conversationController', function($scope, api, $sessionStorage) {
+    $scope.$storage = $sessionStorage;
+    $scope.finder = [];
+    // controller for the modal where you add new converastions
+    // new conversation modal
+    $scope.conv = {
+        display_name: null,
+        members: [],
+        tempmembers: [],
+        avatar: null
+    };
+
+    // typahead search function
+    $scope.checkMember = function() {
+        if ($scope.tempMember == null || $scope.tempMember == "") {
+            $scope.finder = [];
+        } else {
+            api.sidebar.search($scope.tempMember).then(function(response) {
+                $scope.finder = response.data;
+            });
+        }
+    }
+
+    // when user clicks the name, push id into member array and reset tempMember
+    $scope.addMemberToConversation = function(n) {
+        $scope.conv.tempmembers.push(n);
+        $scope.tempMember = null;
+        $scope.finder = [];
+    };
+
+    $scope.removeMemberFromConversation = function(n) {
+        $scope.conv.tempmembers.splice($scope.conv.tempmembers.indexOf(n), 1);
+    }
+
+    $scope.cleanUpCreateWindow = function() {
+        $scope.conv = {
+            display_name: null,
+            tempmembers: [],
+            members: [],
+            avatar: null
+        };
+    }
+
+    // when pressing create, send a request to the API
+    $scope.addConversation = function() {
+        for (var i = 0; i < $scope.conv.tempmembers.length; i++) {
+            $scope.conv.members.push({_id:$scope.conv.tempmembers[i]._id});
+        }
+        delete $scope.conv.tempmembers;
+        $scope.conv.members.push({_id:$scope.$storage.user._id});
+        api.conversations.add($scope.conv).then(function(response) {
+            $scope.cleanUpCreateWindow();
+        });
+    }
+});
+
 // sidebar search animation
 function toggleSearchBar() {
     if (document.getElementById("sidebar-search").style.visibility == "visible") {
