@@ -3,6 +3,11 @@ section.profileSection {
     color: white;
     padding: 20px 0;
 
+    .modal {
+        h4 {color: $primaryAccentColor;}
+        color: $primaryDividerColor;
+    }
+
     .profileDivider {
         margin: 20px 0;
         border-bottom: $primaryDividerColor 2px solid;
