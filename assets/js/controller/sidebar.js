@@ -41,6 +41,7 @@ app.controller('conversationController', function($scope, api, $sessionStorage) 
         if ($scope.tempMember == null || $scope.tempMember == "") {
             $scope.finder = [];
         } else {
+
             api.sidebar.search($scope.tempMember).then(function(response) {
                 $scope.finder = response.data;
             });
