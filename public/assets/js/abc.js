@@ -1,3 +1,7 @@
+$("body").tooltip({
+    selector: '[data-toggle="tooltip"]'
+});
+
 var app = angular.module('app', ['ui.router', 'ngStorage'] );
 
 

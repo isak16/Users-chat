@@ -50,7 +50,7 @@
     <section class="chatSection row col-xs-12" id="msg" scroll-down="loadedChat">
         <div class="row chatContainer" ng-repeat="n in loadedChat.messages">
             <div class="col-xs-12 col-left" ng-if="n.from._id != $storage.user._id">
-                <img ng-src="{{n.from.avatar}}" class="pull-left {{n.status}}">
+                <img ng-src="{{n.from.avatar}}" data-toggle="tooltip" title="{{n.from.display_name}}" data-placement="right" class="pull-left {{n.status}}">
                 <div class="pmContainer pull-left"><p>{{n.content}}</p></div>
             </div>
             <div class="col-xs-12 col-right" ng-if="n.from._id == $storage.user._id">
