@@ -2,12 +2,16 @@ var express = require('express');
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var bodyParser = require("body-parser");
-var app = express();
 var path = require("path");
+
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/users-chat");
 var db = mongoose.connection;
-console.log('SERVER HAS FUCKING STARTED')
+console.log('SERVER HAS FUCKING STARTED');
+
 /**
  * Schemas for users and conversations
  * @type Schema
@@ -68,6 +72,69 @@ app.use(function(req, res, next) {
  */
 var users = mongoose.model("user", userSchema);
 var conversations = mongoose.model("conversations", conversationSchema);
+
+/**
+ * Sockets
+ * Inner functionality replicated from the conversations.put endpoint
+ *
+ */
+io.on('connection', function(socket) {
+    socket.on('message', function(msg) {
+        var message = {
+            from: msg.params.userid,
+            content: msg.body.message,
+            date: Math.floor(new Date() / 1000)
+        }
+
+        conversations.findOneAndUpdate({
+            members: { $in: [{_id: msg.params.userid}] },
+            _id: msg.params.convid
+        },
+        { $push: {
+            messages: message
+        }, $set: {
+            last_timestamp: message.date
+        }}, {new:true})
+        .populate({path: 'messages.from', select: 'display_name avatar _id'})
+        .populate({path: 'members._id', select: 'display_name avatar _id'})
+        .exec(function(error, result) {
+            if (error) {
+                return false;
+            } else if (result) {
+                io.emit('message', result);
+            } else {
+                conversations.findOneAndUpdate({
+                    members: { $size: 2, $all: [{_id: msg.params.userid}, {_id: msg.params.convid}] }
+                },
+                { $push: {
+                    messages: message
+                }, $set: {
+                    last_timestamp: message.date
+                }}, {new: true})
+                .populate({path: 'messages.from', select: 'display_name avatar _id'})
+                .populate({path: 'members._id', select: 'display_name avatar _id'})
+                .exec(function(error, result) {
+                    if (error) {
+                        response.status(500).send(error);
+                    } else if (result) {
+                        io.emit('message', result);
+                    } else {
+                        var newConv = new conversations({members: [{_id: msg.params.userid}, {_id: msg.params.convid}], messages: [message]});
+                        newConv.save(function(error, doc) {
+                            if (error) {
+                                response.status(500).send(error);
+                            }
+                            if (doc) {
+                                users.update({_id: { $in: [{_id: msg.params.userid}, {_id: msg.params.convid}]}}, {$push: {chats: doc._id}}).exec();
+                                io.emit('message', result);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+});
 
 /**
  * Create a general chat room if it doesn't exist
@@ -358,4 +425,4 @@ app.put("/conversations/members/:action/:convid", function(request, response) {
     })
 });
 
-app.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000);

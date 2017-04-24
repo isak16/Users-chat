@@ -4,11 +4,13 @@ app.controller('chatSection' , function($scope, api,$sessionStorage, $state, $st
     api.conversations.get($stateParams.chatId).then(function(response) {
         $scope.loadedChat = response.data;
     });
-    $interval(function() {
-        api.conversations.get($stateParams.chatId).then(function(response) {
-            $scope.loadedChat = response.data;
-        });
-    }, 1000);
+
+    socket.on('message', function(msg) {
+      $scope.$apply(function($scope) {
+          $scope.loadedChat = msg;
+      });
+  });
+
     $scope.send = function(a){
         if (a == null || a == "") {
             return false;
@@ -19,11 +21,13 @@ app.controller('chatSection' , function($scope, api,$sessionStorage, $state, $st
         });
         $scope.content.message = '';
     };
+
      $scope.removeUserFromChat = function(userid) {
         api.conversations.manage($scope.loadedChat._id, "remove", {_id: userid}).then(function(response) {
             $scope.loadedChat = response.data;
         })
     };
+
     $scope.addUserToChat = function(n) {
         api.conversations.manage($scope.loadedChat._id, "add", {_id: n._id}).then(function(response) {
             $scope.loadedChat = response.data;
@@ -31,6 +35,7 @@ app.controller('chatSection' , function($scope, api,$sessionStorage, $state, $st
             $scope.tempMember = null;
         })
     };
+
     $scope.updateConversation = function() {
         var updateObject = {
             avatar: $scope.loadedChat.avatar,
@@ -41,6 +46,7 @@ app.controller('chatSection' , function($scope, api,$sessionStorage, $state, $st
             $scope.loadedChat.display_name = response.data.display_name;
         });
     };
+
     $scope.checkMember = function() {
         if ($scope.tempMember == null || $scope.tempMember == "") {
             $scope.finder = [];

@@ -2,6 +2,7 @@ $("body").tooltip({
     selector: '[data-toggle="tooltip"]'
 });
 
+var socket = io.connect('https://userschat.herokuapp.com');
 var app = angular.module('app', ['ui.router', 'ngStorage'] );
 
 

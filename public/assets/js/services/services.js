@@ -30,7 +30,14 @@ app.factory('api', function($http, $sessionStorage) {
                 return $http.delete(url + "conversations", conversation);
             },
             message: function(id, message) {
-                return $http.put(url + "conversations/message/" + id + "/" + $storage.user._id, {content: message});
+                var msg = {
+                    params: {
+                        userid: $storage.user._id,
+                        convid: id
+                    },
+                    body: message
+                }
+                return socket.emit('message', msg);
             },
             update: function(id, updatedObject) {
                 return $http.put(url + "conversations/" + id, updatedObject);
