@@ -15,10 +15,7 @@ app.controller('chatSection' , function($scope, api,$sessionStorage, $state, $st
         if (a == null || a == "") {
             return false;
         }
-        api.conversations.message($stateParams.chatId, a).then(function(response) {
-            $scope.loadedChat = response.data;
-            console.log($scope.loadedChat);
-        });
+        api.conversations.message($stateParams.chatId, $scope.content);
         $scope.content.message = '';
     };
 
