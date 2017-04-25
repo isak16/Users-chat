@@ -34,7 +34,10 @@ var userSchema = new Schema({
 });
 
 var conversationSchema = new Schema({
-    display_name: String,
+    display_name: {
+        type: String,
+        default: "#New chat"
+    },
     last_timestamp: String,
     avatar: {
         type: String,
